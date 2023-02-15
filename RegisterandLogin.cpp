@@ -15,7 +15,6 @@ bool login ()
     ifstream read;
     read.open("records.txt",ios::app);
     
-    int i = 0;
     while(getline(read,name) && getline(read,pw))
     {
         if(name == username && pw == password)
@@ -24,7 +23,6 @@ bool login ()
         }else{
             return false;
         }
-        i++;
     }
     
 }
@@ -47,7 +45,7 @@ int main()
 
         ofstream dest;
         dest.open("records.txt",ios::app) ;
-        dest << username << endl << password ;
+        dest << username << endl << password << endl ;
         dest.close();
 
         main();
