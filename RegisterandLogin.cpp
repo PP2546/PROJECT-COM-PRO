@@ -14,15 +14,19 @@ bool login ()
 
     ifstream read;
     read.open("records.txt",ios::app);
-    getline(read,name);
-    getline(read,pw);
-
-    if(name == username && pw == password)
+    
+    int i = 0;
+    while(getline(read,name) && getline(read,pw))
     {
-        return true;
-    }else{
-        return false;
+        if(name == username && pw == password)
+        {   
+            return true;
+        }else{
+            return false;
+        }
+        i++;
     }
+    
 }
 
 int main()
