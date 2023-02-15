@@ -13,7 +13,7 @@ bool login ()
     cout << "Enter password : " ; cin >> password ;
 
     ifstream read;
-    read.open("records.txt");
+    read.open("records.txt",ios::app);
     getline(read,name);
     getline(read,pw);
 
@@ -42,7 +42,7 @@ int main()
         cin >> password;
 
         ofstream dest;
-        dest.open("records.txt") ;
+        dest.open("records.txt",ios::app) ;
         dest << username << endl << password ;
         dest.close();
 
