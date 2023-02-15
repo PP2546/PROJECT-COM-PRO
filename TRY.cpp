@@ -11,9 +11,10 @@ void Register()
     string name , password;
     
     cout << "What is your name? : ";
-    getline(cin,name);
+    cin >> name;
+    
     cout << "What is your password? : ";
-    getline(cin,password);
+    cin >> password;
     
     ofstream dest;
     dest.open("records.txt",ios::app);
@@ -29,9 +30,9 @@ void Login()
     string name , password , n , pw;
     
     cout << "Enter is your name : ";
-    getline(cin,name);
+    cin >> name;
     cout << "Enter is your password : ";
-    getline(cin,password);
+    cin >> password;
 
     ifstream source;
     source.open("records.txt",ios::app);
@@ -63,9 +64,9 @@ int main()
 {
     int choose;
     cout << "**********************************************\n";
-    cout << "1.Login : \n" << "2.Register : \n" << "What is your answer : ";
+    cout << "1.Login  \n" << "2.Register  \n" << "What is your answer : ";
     cin >> choose;
-    if(choose == 1); Login();
-    else if(choose == 2); Register();
-    cout << "SORRY,CHOOSE AGAIN BETWEEN 1 OR 2\n";
+    if(choose == 1) Login();
+    else if(choose == 2) Register();
+    else cout << "SORRY,CHOOSE AGAIN BETWEEN 1 OR 2\n";
 }
