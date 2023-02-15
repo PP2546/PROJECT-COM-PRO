@@ -6,30 +6,12 @@
 
 using namespace std;
 
-void Register()
-{
-    string name , password;
-    
-    cout << "What is your name? : ";
-    cin >> name;
-    
-    cout << "What is your password? : ";
-    cin >> password;
-    
-    ofstream dest;
-    dest.open("records.txt",ios::app);
-    dest << name << " " << password << endl;
-    
-    cout << "DONE!!!\n";
-  
-}
-
 void Login()
 {
     int come;
     string name , password , n , pw;
-    
-    cout << "Enter is your name : ";
+    cout << "--------Login-------\n";
+    cout << "Enter is your username : ";
     cin >> name;
     cout << "Enter is your password : ";
     cin >> password;
@@ -57,6 +39,27 @@ void Login()
         cout << "###ERROR###";
         cin.get();      
     }
+}
+
+
+void Register()
+{
+    string name , password;
+    //กรอกชื่อและรหัสเพื่อสมัคร
+    cout << "--------Register-------\n";
+    cout << "What is your username? : ";
+    cin >> name;
+    
+    cout << "What is your password? : ";
+    cin >> password;
+    
+    ofstream dest;
+    dest.open("records.txt",ios::app);
+    dest << name << " " << password << endl;
+    
+    cout << "DONE!!!\n";
+    Login(); //ให้ login ต่อเลย
+  
 }
 
 
