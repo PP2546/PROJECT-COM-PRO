@@ -6,6 +6,27 @@
 
 using namespace std;
 
+void CreatCategory(){
+    int choice;
+    int Cate[] = {0,1,2,3,4,5,6,7,8,9};
+    string CateName[] = {"general","PSAD","sad","Social","langue","science","Techno","Art","Thau","TTher"};
+    int Cate2[] = {10,20,30,40,50,60,70,80,90};
+
+    cout << "----------------------------------\n";
+    cout << "    Welcome to book store\n"; 
+    cout << "----------------------------------\n";
+    for(int i=0;i< 10;i++){ 
+        cout << Cate[i] << "." << CateName[i] <<"\n";
+    }
+    cout << "----------------------------------\n";
+    cout << "Please choose Category : ";
+    cin >> choice;
+    cout << "----------------------------------\n";
+    for(int i=0;i<9;i++){
+        cout << Cate[choice] << Cate2[i] << "\n";
+    }
+}
+
 void Login()
 {
     int come;
@@ -31,8 +52,9 @@ void Login()
 
     if(come == 1)
     {
-        cout << "Hello," << name << "!!!!!";
+        cout << "Hello," << name << "!!!!!\n";
         cin.get();
+        CreatCategory();
     }
     else
     {
