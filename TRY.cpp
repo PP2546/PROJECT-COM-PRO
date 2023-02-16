@@ -26,6 +26,7 @@ void CreatCategory(){
     cout << "Please choose Category : ";
     cin >> choice;
     cout << "----------------------------------\n";
+    cout << "-" <<  CateName[choice] << "-"<< "\n";
     for(int i=0;i<9;i++){
         cout << Cate[choice] << Cate2[i] << "\n";
     }
