@@ -3,7 +3,7 @@
 #include<fstream>
 #include<cstdlib>
 #include<string>
-#include<conio.h>
+
 
 using namespace std;
 
