@@ -82,4 +82,5 @@ int main()
     else if(choose == 2) Register();
     else cout << "\tSORRY,CHOOSE AGAIN BETWEEN 1 OR 2\n";
     
+    //เติม Function เลือก 1 2 3 
 }   
