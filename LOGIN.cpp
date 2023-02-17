@@ -6,15 +6,16 @@
 
 using namespace std;
 
+// Function Login
 void Login()
 {
     int come;
     string name , password , n , pw;
     cout << "\n";
-    cout << "--------Login-------\n";
-    cout << "Enter is your username : ";
+    cout << "\t----------- Login ----------\n";
+    cout << "\tEnter is your username : ";
     cin >> name;
-    cout << "Enter is your password : ";
+    cout << "\tEnter is your password : ";
     cin >> password;
 
     ifstream source;
@@ -32,8 +33,14 @@ void Login()
 
     if(come == 1)
     {
-        cout << "Hello," << name << "!!!!!";
+        cout << "\nLogin successfaul ++\n\n";
+        cout << "Hello , " << name << " What do you want to do?\n";
         cin.get();
+
+        cout << "\n";
+        cout << "\tPress < 1 > to Buy a book" << endl;
+        cout << "\tPress < 2 > to Show all books" << endl;
+        cout << "\tPress < 3 > to Exit" << endl;
     }
     else
     {
@@ -42,37 +49,37 @@ void Login()
     }
 }
 
-
+// Function Register
 void Register()
 {
     string name , password;
     //กรอกชื่อและรหัสเพื่อสมัคร
     cout << "\n";
-    cout << "--------Register-------\n";
-    cout << "What is your username? : ";
+    cout << "\t--------- Register ---------\n";
+    cout << "\tWhat is your username? : ";
     cin >> name;
     
-    cout << "What is your password? : ";
+    cout << "\tWhat is your password? : ";
     cin >> password;
     
     ofstream dest;
     dest.open("records.txt",ios::app);
     dest << name << " " << password << endl;
     
-    cout << "DONE!!!\n";
+    cout << "\nSuccessful register ++ \n";
     Login(); //ให้ login ต่อเลย
   
 }
-
 
 int main()
 {
     int choose;
     cout << "\n";
-    cout << "--------- WELCOME TO CPE BOOKSTORE ---------\n";
-    cout << "1.Login  \n" << "2.Register  \n" << "What is your answer : ";
+    cout << "-------- WELCOME TO CPE BOOKSTORE --------\n\n";
+    cout << "\t  Press < 1 > to Login  \n" << "\t  Press < 2 > to Register  \n" << "\t\nWhat is your answer : ";
     cin >> choose;
     if(choose == 1) Login();
     else if(choose == 2) Register();
-    else cout << "SORRY,CHOOSE AGAIN BETWEEN 1 OR 2\n";
-}
+    else cout << "\tSORRY,CHOOSE AGAIN BETWEEN 1 OR 2\n";
+    
+}   
