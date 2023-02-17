@@ -10,6 +10,7 @@ void Login()
 {
     int come;
     string name , password , n , pw;
+    cout << "\n";
     cout << "--------Login-------\n";
     cout << "Enter is your username : ";
     cin >> name;
@@ -46,6 +47,7 @@ void Register()
 {
     string name , password;
     //กรอกชื่อและรหัสเพื่อสมัคร
+    cout << "\n";
     cout << "--------Register-------\n";
     cout << "What is your username? : ";
     cin >> name;
@@ -66,7 +68,8 @@ void Register()
 int main()
 {
     int choose;
-    cout << "**********************************************\n";
+    cout << "\n";
+    cout << "--------- WELCOME TO CPE BOOKSTORE ---------\n";
     cout << "1.Login  \n" << "2.Register  \n" << "What is your answer : ";
     cin >> choose;
     if(choose == 1) Login();
