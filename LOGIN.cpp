@@ -99,6 +99,5 @@ int main()
     cin >> choose_menu;
     menu(choose_menu);
 
-
     //เติม Function เลือก 1 2 3
 }   
