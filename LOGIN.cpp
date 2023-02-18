@@ -44,8 +44,9 @@ void Login()
     }
     else
     {
-        cout << "###ERROR###";
-        cin.get();      
+        cout << "\nLogin failed , please try again.\n ";
+        cin.get(); 
+        Login();     
     }
 }
 
@@ -71,16 +72,33 @@ void Register()
   
 }
 
+//Function menu
+void menu(int x){
+    
+}
+
+
 int main()
 {
     int choose;
+    int choose_menu;
     cout << "\n";
     cout << "-------- WELCOME TO CPE BOOKSTORE --------\n\n";
-    cout << "\t  Press < 1 > to Login  \n" << "\t  Press < 2 > to Register  \n" << "\t\nWhat is your answer : ";
+    cout << "\t  Press < 1 > to Login  \n";
+    cout << "\t  Press < 2 > to Register  \n";
+    cout << "\t\nWhat is your answer : ";
     cin >> choose;
     if(choose == 1) Login();
     else if(choose == 2) Register();
-    else cout << "\tSORRY,CHOOSE AGAIN BETWEEN 1 OR 2\n";
+    else { 
+        cout << "\t\nxxxxx ERROR xxxxx\n"; 
+        return 0; 
+    }
     
+    cout << "\t\nWhat is your answer : ";
+    cin >> choose_menu;
+    menu(choose_menu);
+
+
     //เติม Function เลือก 1 2 3
 }   
