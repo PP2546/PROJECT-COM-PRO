@@ -43,7 +43,7 @@ void bookstore::Start()
 // Function Login
 void bookstore::Login()
 {
-    int come;
+    int come = 0;
     string name , password , n , pw;
     cout << "\n";
     cout << "\t----------- Login ----------\n";
@@ -116,12 +116,21 @@ void bookstore::Show_book() // การแสดงข้อมูล
     ifstream read;
     read.open("book.txt",ios::app);
     string textline;
+    
     while(getline(read,textline))
     {
-    cout << "\nEnter Title name : " << title;
-    cout << "\nEnter price : " << *price;
-    cout << "\nEnter stock : " << *stock;
+        int start = 0;
+        int end = textline.find_first_of(" ");
+        cout << "-------------------------------\n";
+            while(end != -1)
+            {
+                cout << textline.substr(start,end-start) << endl;
+                start = end+1;
+                end = textline.find_first_of(" ",start);
+            }
+        cout << textline.substr(start,textline.size()-start) << endl;
     }
+    cout << "-------------------------------\n";
 }
 
 //Function Data_book
