@@ -1,10 +1,12 @@
 #include<iostream>
 #include<string>
 #include<cstdlib>
+#include<cstring>
+
 
 using namespace std;
 
-Class book //วิะีการใช้ class ตามด้วยชื่อคลาสที่เรากำหนด 
+class book //วิะีการใช้ class ตามด้วยชื่อคลาสที่เรากำหนด 
 {
 private: // ไม่สามารถเข้าถึงได้จากภายนอก class
         char *author;
@@ -69,7 +71,7 @@ void book::showdata() // การแสดงข้อมูล
 
 int book::search(char a[], char b[])
 {   
-    if(strcmp(a,auther)==0 && strcmp(b,title)==0) return 1;// เป็นฟังก์ชันที่ใช้ในการเปรียบเทียบข้อความ
+    if(strcmp(a,author)==0 && strcmp(b,title)==0) return 1;// เป็นฟังก์ชันที่ใช้ในการเปรียบเทียบข้อความ
     else return 0;
 }
 
@@ -120,7 +122,7 @@ int main()
         if(ans == 1) // หนังสือใหม่เพิ่มมา
         {
             B[i] = new book;
-            b[i]->data();
+            B[i]->data();
             i++;
         }
         else if(ans == 2) // ซื้อหนังสือ-->ลดลง
@@ -128,13 +130,13 @@ int main()
             cin.ignore();
             cout << "\nEnter Title of Book : ";
             cin.getline(titlebuy,20);
-            cout <<  cout << "\nEnter Author of Book : ";
+            cout << "\nEnter Author of Book : ";
             cin.getline(authorbuy,20);
             for(t=0 ; t<1 ; t++)
             {
                 if(B[t]->search(titlebuy,authorbuy))
                 {
-                    B[t]->bookout;
+                    B[t]->bookout();
                     break;
                 }
             }
@@ -145,7 +147,7 @@ int main()
             cin.ignore();
             cout << "\nEnter Title of Book : ";
             cin.getline(titlebuy,20);
-            cout <<  cout << "\nEnter Author of Book : ";
+            cout << "\nEnter Author of Book : ";
             cin.getline(authorbuy,20);
 
             for(t=0 ; t<1 ; t++)
@@ -163,7 +165,7 @@ int main()
             cin.ignore();
             cout << "\nEnter Title of Book : ";
             cin.getline(titlebuy,20);
-            cout <<  cout << "\nEnter Author of Book : ";
+            cout << "\nEnter Author of Book : ";
             cin.getline(authorbuy,20);
 
             for(t=0 ; t<1 ; t++)
