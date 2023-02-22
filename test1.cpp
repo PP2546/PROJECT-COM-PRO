@@ -28,7 +28,7 @@ public:
     void Control_panel();
     //void Buy_book(); 
     void Show_book();
-    void Data_book();
+    //void Data_book();
 };
 
 // Function to display first page
@@ -125,9 +125,10 @@ void bookstore::Show_book() // การแสดงข้อมูล
 }
 
 //Function Data_book
-//void book::data() // ข้อมูลตั้งต้น
+
+//void bookstore::Data_book() // ข้อมูลตั้งต้น
 //{
-    cin.ignore();
+    /*cin.ignore();
     ofstream write;
     write.open("book.txt",ios::app);
     cout << "\nEnter Title name : ";
@@ -135,7 +136,7 @@ void bookstore::Show_book() // การแสดงข้อมูล
     cout << "\nEnter price : ";
     write << cin >> *price;
     cout << "\nEnter stock : ";
-    write << cin >> *stock;
+    write << cin >> *stock;*/
 //}
 
 // Function Buy book 
@@ -150,7 +151,7 @@ void bookstore::Show_book() // การแสดงข้อมูล
         //*stock -= num; // ของในคลังที่ถูกออกไปขาย
         //cout << "SUCCESS!!!";
         //cout << "cost : " << (*price)*num; // ราคาสินค้า
-    } 
+    
     //else
     //{
         //cout << "Sorry , Sold out"; 
