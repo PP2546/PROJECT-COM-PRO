@@ -1,6 +1,5 @@
 
 #include<iostream>
-#include<istream>
 #include<fstream>
 #include<cstdlib>
 #include<string>
@@ -12,13 +11,24 @@ using namespace std;
 
 // Bookshop Class
 class bookstore {
+private: // ไม่สามารถเข้าถึงได้จากภายนอก class
+        char *title;
+        float *price;
+        int *stock;
 public:
+    bookstore() 
+        {
+            title = new char[20];
+            price = new float;
+            stock = new int;
+        }
     void Start();
     void Login();
     void Register();
     void Control_panel();
     //void Buy_book(); 
-    //void Show_book();
+    void Show_book();
+    void Data_book();
 };
 
 // Function to display first page
@@ -100,11 +110,56 @@ void bookstore::Control_panel()
     cout << "\tPress < 3 > to Exit" << endl;
 }
 
-// Function Buy book 
-// void bookstore::Buy_book(){}
-
 // Function Show all book 
-// void bookstore::Show_book(){}
+void bookstore::Show_book() // การแสดงข้อมูล
+{   
+    ifstream read;
+    read.open("book.txt",ios::app);
+    string textline;
+    while(getline(read,textline))
+    {
+    cout << "\nEnter Title name : " << title;
+    cout << "\nEnter price : " << *price;
+    cout << "\nEnter stock : " << *stock;
+    }
+}
+
+//Function Data_book
+//void book::data() // ข้อมูลตั้งต้น
+//{
+    cin.ignore();
+    ofstream write;
+    write.open("book.txt",ios::app);
+    cout << "\nEnter Title name : ";
+    write << cin.getline(title,20);
+    cout << "\nEnter price : ";
+    write << cin >> *price;
+    cout << "\nEnter stock : ";
+    write << cin >> *stock;
+//}
+
+// Function Buy book 
+//void bookstore::Buy_book()
+//{
+    //int num;
+    //cout << "\nEnter number of books to buy : ";
+    //cin >> num; // จำนวนสินค้าที่จะซื้อ
+
+    //if(num <= *stock) // สินค้ายังเหลือ/พอดี
+    //{
+        //*stock -= num; // ของในคลังที่ถูกออกไปขาย
+        //cout << "SUCCESS!!!";
+        //cout << "cost : " << (*price)*num; // ราคาสินค้า
+    } 
+    //else
+    //{
+        //cout << "Sorry , Sold out"; 
+    //}
+//}
+
+
+
+
 
 
 // Function for book store record
@@ -137,8 +192,7 @@ void bookstorerecord()
                     break;
 
                 case 2:
-                    /* code show book*/
-                    cout << "Show book54878899";
+                    b.Show_book();
                     exit(0);
                     break;
                 
