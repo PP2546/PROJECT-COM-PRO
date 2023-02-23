@@ -72,7 +72,7 @@ void bookstore::Login()
 
     if(come == 1)
     {
-        cout << "\nLogin successfaul ++\n\n";
+        cout << "\nLogin successfaul ++\n\n";ฆ
         cout << "Hello , " << name << " What do you want to do?\n";
         cin.get();
     }
@@ -215,7 +215,7 @@ void bookstore::Edit_data()
     
     for(int i=0;i < Title.size();i++)
     {
-        if(Title != title.size())
+        if(Title_number != title.size())
         {
             write << title[i] << endl;
         }
