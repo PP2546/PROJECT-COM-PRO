@@ -1,8 +1,8 @@
-
 #include<iostream>
 #include<fstream>
 #include<cstdlib>
 #include<string>
+#include<vector>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,9 +27,10 @@ public:
     void Register();
     void Control_panel();
     void Control_panelForStaff();
-    //void Buy_book(); 
+    void Buy_book(); 
     void Show_book();
     void Data_book();
+    void Edit_data();
 };
 
 // Function to display first page
@@ -168,24 +169,64 @@ void bookstore::Data_book() // ข้อมูลตั้งต้น
 }
 
 // Function Buy book 
-//void bookstore::Buy_book()
-//{
-    //int num;
-    //cout << "\nEnter number of books to buy : ";
-    //cin >> num; // จำนวนสินค้าที่จะซื้อ
+void bookstore::Buy_book()
+{
+    int num;
+    cout << "\nEnter number of books to buy : ";
+    cin >> num; // จำนวนสินค้าที่จะซื้อ
 
-    //if(num <= *stock) // สินค้ายังเหลือ/พอดี
-    //{
+    if(num <= *stock) // สินค้ายังเหลือ/พอดี
+    {
+        bookstore b;
+        b.Edit_data();
         //*stock -= num; // ของในคลังที่ถูกออกไปขาย
-        //cout << "SUCCESS!!!";
-        //cout << "cost : " << (*price)*num; // ราคาสินค้า
-    
-    //else
-    //{
-        //cout << "Sorry , Sold out"; 
-    //}
-//}
+        cout << "SUCCESS!!!";
+        cout << "cost : " << (*price)*num; // ราคาสินค้า
+    }
+    else
+    {
+        cout << "Sorry , Sold out"; 
+    }
+}
 
+//Function Edit data
+void bookstore::Edit_data()
+{
+    string text;
+    ifstream read;
+    read.open("book.txt",ios::app);
+
+    int Title_number;
+    
+    vector<string> title;
+    string Title;
+
+    while(getline(read,Title))
+    {
+        title.push_back(Title);
+    }
+
+    read.close();
+
+    ofstream write;
+    write.open("book.txt",ios::app);
+    
+    Title_number--;
+    
+    for(int i=0;i < Title.size();i++)
+    {
+        if(Title != title.size())
+        {
+            write << title[i] << endl;
+        }
+        else
+        {
+            write << text << endl;
+        }
+    }
+
+    write.close();
+}
 
 
 
@@ -219,8 +260,7 @@ void bookstorerecord()
                 switch (choice_control)
                 {
                 case 1:
-                    /* code buy book */
-                    cout << "buy book5555555555";
+                    b.Buy_book();
                     exit(0);
                     break;
 
@@ -259,4 +299,3 @@ int main()
 
 	return 0;
 }
- 
