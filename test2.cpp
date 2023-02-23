@@ -208,6 +208,7 @@ void bookstorerecord()
 
 		case 0:
             b.Data_book();
+            b.Control_panelForStaff();
         case 1:
 			b.Login();
             b.Control_panel();
