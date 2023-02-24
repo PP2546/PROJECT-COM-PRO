@@ -1,1 +1,5 @@
-
+Psychology:350 4 
+Thing again:420 7 
+Funda :135.5 5 
+PHYS ENG:129 8 
+Calculus 3:169 15 
