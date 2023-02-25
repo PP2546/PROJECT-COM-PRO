@@ -131,7 +131,7 @@ void bookstore::Control_panel()
     cout << "\t  Press < 3 > to Exit" << endl;
 }
 
-// Function Show all book 
+// Function Show all book
 void bookstore::Show_book() // การแสดงข้อมูล
 {   
     bookstore p;
