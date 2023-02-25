@@ -111,8 +111,8 @@ void bookstore::Register()
 // Function check user
 void bookstore::CheckUser(int x)
 {
-    if(x == 1) Discount = Discount + 15;
-    else if (x == 0) Discount = 0;
+    if(x == 1) Discount = 10;
+    else if (x == 0) Discount = 2;
 }
 
 // Function Control panel for staff
@@ -126,7 +126,6 @@ void bookstore::Control_panelForStaff()
 // Function to display the menus
 void bookstore::Control_panel()
 {
-    cout << Discount << "\n";
     cout << "\t  Press < 1 > to Buy a book" << endl;
     cout << "\t  Press < 2 > to Show all books" << endl;
     cout << "\t  Press < 3 > to Exit" << endl;
@@ -204,9 +203,11 @@ void bookstore::Buy_book()
     {
         //b.Edit_data();
         stock[bookID] -= quantity_buy_book; // ของในคลังที่ถูกออกไปขาย
-        cout << "\nCost : " << b.price[bookID]*quantity_buy_book << " Bath\n"; // Cost
-        cout << "Discount : " << Discount <<" Bath\n" ; // Discount
-        cout << "Total cost : " << (b.price[bookID]*quantity_buy_book)-Discount << " Bath \n\n"; // Total cost
+        double cost = (b.price[bookID]*quantity_buy_book);
+        cout << "\nCost : " << cost << " Bath\n"; // Cost
+        cout << "Discount : " << Discount <<" %\n"; // Discount
+        cout << "Discounted price : " << (cost*Discount)/100 <<" Bath\n"; // Discount price
+        cout << "Total cost : " << cost-(cost*Discount)/100 << " Bath \n\n"; // Total cost
         cout << "*****************************************\n";
         cout << "*                                       *\n";
         cout << "*            THANK YOU !!!              *\n";
