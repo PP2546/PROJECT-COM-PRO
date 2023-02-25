@@ -14,14 +14,12 @@ class bookstore {
     int Discount;
     private: // ไม่สามารถเข้าถึงได้จากภายนอก class
         char *title;
-        float *price;
-        int *stock;
+        float price[100];
+        int stock[100];
     public:
         bookstore() 
             {
                 title = new char[20];
-                price = new float;
-                stock = new int;
             }
         void Start();
         void Login();
@@ -29,7 +27,7 @@ class bookstore {
         void CheckUser(int);
         void Control_panel();
         void Control_panelForStaff();
-        void Buy_book(); 
+        void Buy_book();
         void Show_book();
         void Data_book(int);
         void Edit_data();
@@ -137,22 +135,24 @@ void bookstore::Control_panel()
 // Function Show all book 
 void bookstore::Show_book() // การแสดงข้อมูล
 {   
+    bookstore p;
     ifstream read;
     read.open("book.txt",ios::app);
     string textline;
     int i = 1;
+    int s;
+    float Pr;
     while(getline(read,textline))
     {
         char title[100];
-        int stock;
-        float price;
-        int start = 0;
-        sscanf(textline.c_str(),"%[^:]: %f %d",title,&price,&stock);
+        sscanf(textline.c_str(),"%[^:]: %f %d",title,&Pr,&s);
         cout << "\t  -------------------------------\n";
         cout << "\t  Number ID : " << i << endl;
-        cout << "\t\t"<<title << endl; 
-        cout << "\t\t  Price: " << price << " Bath" << endl;
-        cout << "\t\t  Stock: " << stock << endl;
+        cout << "\t\t"<< title << endl; 
+        cout << "\t\t  Price: " << Pr << " Bath" << endl;
+        cout << "\t\t  Stock: " << s << endl;
+        price[i] = Pr;
+        stock[i] = s;
         i++;
     }
     cout << "\t  -------------------------------\n";
@@ -200,13 +200,13 @@ void bookstore::Buy_book()
     cout << "How many books do you want to buy? : ";
     cin >> quantity_buy_book;
     
-    if(quantity_buy_book <= *stock) // สินค้ายังเหลือ/พอดี
+    if(quantity_buy_book <= b.stock[bookID]) // สินค้ายังเหลือ/พอดี
     {
-        b.Edit_data();
-        *stock -= quantity_buy_book; // ของในคลังที่ถูกออกไปขาย
-        cout << "\nCost : " << (*price)*quantity_buy_book << " Bath\n"; // Cost
+        //b.Edit_data();
+        stock[bookID] -= quantity_buy_book; // ของในคลังที่ถูกออกไปขาย
+        cout << "\nCost : " << b.price[bookID]*quantity_buy_book << " Bath\n"; // Cost
         cout << "Discount : " << Discount <<" Bath\n" ; // Discount
-        cout << "Total cost : " << ((*price)*quantity_buy_book)-Discount << " Bath \n\n"; // Total cost
+        cout << "Total cost : " << (b.price[bookID]*quantity_buy_book)-Discount << " Bath \n\n"; // Total cost
         cout << "*****************************************\n";
         cout << "*                                       *\n";
         cout << "*            THANK YOU !!!              *\n";
