@@ -12,6 +12,9 @@ using namespace std;
 // Bookshop Class
 class bookstore {
     int Discount;
+    char TitleEdit[100];
+    float PriceEdit;
+    int StockEdit;
     private: // ไม่สามารถเข้าถึงได้จากภายนอก class
         char *title;
         float price[100];
@@ -28,9 +31,10 @@ class bookstore {
         void Control_panel();
         void Control_panelForStaff();
         void Buy_book();
+        void NewTemp(int);
         void Show_book();
         void Data_book(int);
-        void Edit_data();
+        void Edit_data(int,int);
 };
 
 // Function to display first page
@@ -112,7 +116,7 @@ void bookstore::Register()
 void bookstore::CheckUser(int x)
 {
     if(x == 1) Discount = 10;
-    else if (x == 0) Discount = 2;
+    else if (x == 0) Discount = 0;
 }
 
 // Function Control panel for staff
@@ -131,10 +135,10 @@ void bookstore::Control_panel()
     cout << "\t  Press < 3 > to Exit" << endl;
 }
 
+
 // Function Show all book
 void bookstore::Show_book() // การแสดงข้อมูล
 {   
-    bookstore p;
     ifstream read;
     read.open("book.txt",ios::app);
     string textline;
@@ -156,6 +160,25 @@ void bookstore::Show_book() // การแสดงข้อมูล
     }
     cout << "\t  -------------------------------\n";
 }
+
+
+
+void bookstore::NewTemp(int count)
+{
+    ifstream read;
+    read.open("book.txt");
+    ofstream write("bookCOPY.txt");
+    
+    
+    string textline;
+    for(int i = 0;i < count;i++)
+    {
+        getline(read,textline);
+        sscanf(textline.c_str(),"%[^:]: %f %d",TitleEdit,&PriceEdit,&StockEdit);
+    }
+    write << TitleEdit << ":" << PriceEdit << " " << StockEdit;
+}
+
 
 //Function Data_book
 void bookstore::Data_book(int xorder) // ข้อมูลตั้งต้น
@@ -199,9 +222,10 @@ void bookstore::Buy_book()
     cout << "How many books do you want to buy? : ";
     cin >> quantity_buy_book;
     
+
     if(quantity_buy_book <= b.stock[bookID]) // สินค้ายังเหลือ/พอดี
     {
-        //b.Edit_data();
+        b.Edit_data(bookID,quantity_buy_book);
         stock[bookID] -= quantity_buy_book; // ของในคลังที่ถูกออกไปขาย
         double cost = (b.price[bookID]*quantity_buy_book);
         cout << "\nCost : " << cost << " Bath\n"; // Cost
@@ -221,39 +245,27 @@ void bookstore::Buy_book()
 }
 
 // Function Edit data
-void bookstore::Edit_data()
+void bookstore::Edit_data(int numline,int quantity)
 {
     ifstream read;
     read.open("book.txt",ios::app);
 
-    int Title_number;
-    
+    int Title_number = numline;
     vector<string> titleline;
-    string Title;
-    string text;
-    text = Title ;
+    string line;
 
-    while(getline(read,Title))
-    {
-        titleline.push_back(Title);
+    while(getline(read,line)){
+        titleline.push_back(line);
     }
-
     read.close();
-
-    ofstream write;
-    write.open("book.txt",ios::app);
-    
+    NewTemp(numline);
+    ofstream write("book.txt");
     Title_number--;
-    
-    for(int i=0;i < Title.size();i++)
-    {
-        if(Title_number != titleline.size())
-        {
+    for(int i = 0; i < titleline.size();i++){
+        if(i != Title_number){
             write << titleline[i] << endl;
-        }
-        else
-        {
-            write << text << endl;
+        } else{
+            write << TitleEdit << ":" << PriceEdit << " " << StockEdit-quantity << endl;
         }
     }
     write.close();
