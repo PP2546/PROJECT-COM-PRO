@@ -29,6 +29,7 @@ class bookstore {
             }
         void Start();
         void Login();
+        void staffLogin();
         void Register();
         void CheckUser(int,int);
         void Control_panel();
@@ -52,6 +53,44 @@ void bookstore::Start()
 
     cout << "------------------ Staff Only ------------------\n";
     cout << "\t  Press < 0 > to Add book to stock  \n";
+}
+
+//Function login for Staff
+void bookstore::staffLogin()
+{
+    string name , password , n , pw;
+    cout << "\n";
+    cout << "\t------------ Login ------------\n";
+    cout << "\tEnter is your username : ";
+    cin >> name;
+    cout << "\tEnter is your password : ";
+    cin >> password;
+
+    ifstream source;
+    source.open("STAFFLOGIN.txt",ios::app);
+    
+    while(source >> n >> pw)
+    {
+        if(n == name && pw == password)
+        {
+            come = 1;
+        }
+    }
+
+    source.close();
+
+    if(come == 1)
+    {
+        cout << "\nLogin successfaul ++\n\n";
+        cout << "Hello , " << name << " What would you like to do?\n";
+        cin.get();
+    }
+    else
+    {
+        cout << "\nLogin failed , please try again.\n ";
+        cin.get(); 
+        staffLogin();     
+    }
 }
 
 // Function Login
@@ -118,7 +157,6 @@ void bookstore::Register()
 void bookstore::CheckUser(int x ,int T)
 {
     if(x == 1 && T >= 5 ) Discount = 10;
-    else if(x==1 && T < 5) Discount = 0;
     else if (x == 0) Discount = 0;
 }
 
@@ -249,9 +287,8 @@ void bookstore::Buy_book()
             cout << "-------------------------------------\n";
             cout << "Total Books : " << Totalquantity << endl;
             cout << "Discount : " << b.Discount <<" %\n"; // Discount
-            cout << "Discounted price : " << (TotalCost*b.Discount)/100 <<" Bath\n"; // Discount price
-            cout << "-------------------------------------\n";
-            cout << "Total cost : " << TotalCost-(TotalCost*b.Discount)/100 << " Bath \n\n"; // Total cost
+            cout << "Discounted price : " << (TotalCost*b.Discount)/100 <<" Bath\n\n"; // Discount price
+            cout << "Total cost : " << TotalCost-(TotalCost*b.Discount)/100 << " Bath \n"; // Total cost
             cout << "*****************************************\n";
             cout << "*                                       *\n";
             cout << "*            THANK YOU !!!              *\n";
