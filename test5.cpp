@@ -117,7 +117,7 @@ void bookstore::Register()
 // Function check user
 void bookstore::CheckUser(int x)
 {
-    if(x == 1) Discount = 10;
+    if(x == 1 && Totalquantity >= 5 ) Discount = 10;
     else if (x == 0) Discount = 0;
 }
 
