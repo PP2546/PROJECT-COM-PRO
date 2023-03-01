@@ -3,3 +3,5 @@ Thing again:420 7
 Funda :135.5 5 
 PHYS ENG:129 8 
 Calculus 3:169 15 
+Music in modern life:500 4 
+Learning basic C++ :750 3 
