@@ -40,7 +40,6 @@ void bookstorerecord()
 
         case 1:
 			b.Login();
-            b.CheckUser(1);
             b.Control_panel();
             cout << "\t\nWhat is your answer : ";
 		    cin >> choice_control;
@@ -72,7 +71,6 @@ void bookstorerecord()
 
         case 3:
             b.Control_panel();
-            b.CheckUser(0);
             cout << "\t\nWhat is your answer : ";
 		    cin >> choice_control;
             while (1)

@@ -4,4 +4,8 @@ Funda :135.5 5
 PHYS ENG:129 8 
 Calculus 3:169 15 
 Music in modern life:500 4 
-Learning basic C++ :750 3 
+Learning basic C++ :750 3
+Marvel Comic:250 3 
+Disney kids:100 2 
+How to make web:450 1 
+English 2:120 3 
