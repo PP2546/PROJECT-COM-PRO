@@ -82,7 +82,6 @@ void bookstore::staffLogin()
     if(come == 1)
     {
         cout << "\nLogin successfaul ++\n\n";
-        cout << "Hello , " << name << " What would you like to do?\n";
         cin.get();
     }
     else
