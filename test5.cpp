@@ -29,6 +29,7 @@ class bookstore {
             }
         void Start();
         void Login();
+	void staffLogin();
         void Register();
         void CheckUser(int,int);
         void Control_panel();
