@@ -11,16 +11,17 @@ using namespace std;
 
 // Bookshop Class
 class bookstore {
-    int Discount;
-    char TitleEdit[100];
-    float PriceEdit;
-    int StockEdit;
-    double TotalCost = 0;
-    int Totalquantity = 0;
     private: // ไม่สามารถเข้าถึงได้จากภายนอก class
         char *title;
         float price[100];
         int stock[100];
+        int Discount;
+        char TitleEdit[100];
+        float PriceEdit;
+        int StockEdit;
+        double TotalCost = 0;
+        int Totalquantity = 0;
+        int come = 0;
     public:
         bookstore() 
             {
@@ -29,7 +30,7 @@ class bookstore {
         void Start();
         void Login();
         void Register();
-        void CheckUser(int);
+        void CheckUser(int,int);
         void Control_panel();
         void Control_panelForStaff();
         void Buy_book();
@@ -56,7 +57,6 @@ void bookstore::Start()
 // Function Login
 void bookstore::Login()
 {
-    int come = 0;
     string name , password , n , pw;
     cout << "\n";
     cout << "\t------------ Login ------------\n";
@@ -115,9 +115,9 @@ void bookstore::Register()
 }
 
 // Function check user
-void bookstore::CheckUser(int x)
+void bookstore::CheckUser(int x ,int T)
 {
-    if(x == 1 && Totalquantity >= 5 ) Discount = 10;
+    if(x == 1 && T >= 5 ) Discount = 10;
     else if (x == 0) Discount = 0;
 }
 
@@ -245,6 +245,7 @@ void bookstore::Buy_book()
         if(Answer == 'Y'){
             Buy_book();
         }else{
+            b.CheckUser(come , Totalquantity);
             cout << "-------------------------------------\n";
             cout << "Total Books : " << Totalquantity << endl;
             cout << "Discount : " << Discount <<" %\n"; // Discount
@@ -331,7 +332,6 @@ void bookstorerecord()
 
         case 1:
 			b.Login();
-            b.CheckUser(1);
             b.Control_panel();
             cout << "\t\nWhat is your answer : ";
 		    cin >> choice_control;
@@ -363,7 +363,6 @@ void bookstorerecord()
 
         case 3:
             b.Control_panel();
-            b.CheckUser(0);
             cout << "\t\nWhat is your answer : ";
 		    cin >> choice_control;
             while (1)
