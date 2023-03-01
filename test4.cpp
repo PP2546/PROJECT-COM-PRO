@@ -15,6 +15,8 @@ class bookstore {
     char TitleEdit[100];
     float PriceEdit;
     int StockEdit;
+    double TotalCost = 0;
+    int Totalquantity = 0;
     private: // ไม่สามารถเข้าถึงได้จากภายนอก class
         char *title;
         float price[100];
@@ -151,7 +153,7 @@ void bookstore::Show_book() // การแสดงข้อมูล
         sscanf(textline.c_str(),"%[^:]: %f %d",title,&Pr,&s);
         cout << "\t  -------------------------------\n";
         cout << "\t  Number ID : " << i << endl;
-        cout << "\t\t"<< title << endl; 
+        cout << "\t\t  "<< title << endl; 
         cout << "\t\t  Price: " << Pr << " Bath" << endl;
         cout << "\t\t  Stock: " << s << endl;
         price[i] = Pr;
@@ -163,7 +165,7 @@ void bookstore::Show_book() // การแสดงข้อมูล
 
 
 
-void bookstore::NewTemp(int count)
+void bookstore::NewTemp(int count) //รับไฟล์ต้นฉบับจาก txt เพื่อนำมา copy เฉพาะบรรทัดที่ต้องการจะแก้ไข รับ parameter คือเลขบรรทัด
 {
     ifstream read;
     read.open("book.txt");
@@ -213,6 +215,7 @@ void bookstore::Buy_book()
 {
     int quantity_buy_book;
     int bookID;
+    char Answer;
     bookstore b;
     b.Show_book();
 
@@ -221,22 +224,38 @@ void bookstore::Buy_book()
     cin >> bookID;
     cout << "How many books do you want to buy? : ";
     cin >> quantity_buy_book;
-    
+    system("cls");
+
 
     if(quantity_buy_book <= b.stock[bookID]) // สินค้ายังเหลือ/พอดี
     {
         b.Edit_data(bookID,quantity_buy_book);
         stock[bookID] -= quantity_buy_book; // ของในคลังที่ถูกออกไปขาย
-        double cost = (b.price[bookID]*quantity_buy_book);
+        double cost = b.price[bookID]*quantity_buy_book;
+        TotalCost = TotalCost + cost;
+        Totalquantity = Totalquantity + quantity_buy_book;
         cout << "\nCost : " << cost << " Bath\n"; // Cost
-        cout << "Discount : " << Discount <<" %\n"; // Discount
-        cout << "Discounted price : " << (cost*Discount)/100 <<" Bath\n"; // Discount price
-        cout << "Total cost : " << cost-(cost*Discount)/100 << " Bath \n\n"; // Total cost
-        cout << "*****************************************\n";
-        cout << "*                                       *\n";
-        cout << "*            THANK YOU !!!              *\n";
-        cout << "*                                       *\n";
-        cout << "*****************************************\n";
+        cout << "-------------------------------------\n";
+        cout << "\nTotal Books : " << Totalquantity;
+        cout << "\nTotal cost : " << TotalCost << " Bath \n\n"; // Total cost
+        cout << "-------------------------------------\n";
+        cout << "Do you want to buy another book? <Y/N> :";
+        cin >> Answer;
+        system("cls");
+        if(Answer == 'Y'){
+            Buy_book();
+        }else{
+            cout << "-------------------------------------\n";
+            cout << "Total Books : " << Totalquantity << endl;
+            cout << "Discount : " << Discount <<" %\n"; // Discount
+            cout << "Discounted price : " << (TotalCost*Discount)/100 <<" Bath\n\n"; // Discount price
+            cout << "Total cost : " << TotalCost-(TotalCost*Discount)/100 << " Bath \n"; // Total cost
+            cout << "*****************************************\n";
+            cout << "*                                       *\n";
+            cout << "*            THANK YOU !!!              *\n";
+            cout << "*                                       *\n";
+            cout << "*****************************************\n";
+        }
     }
     else
     {
@@ -245,7 +264,7 @@ void bookstore::Buy_book()
 }
 
 // Function Edit data
-void bookstore::Edit_data(int numline,int quantity)
+void bookstore::Edit_data(int numline,int quantity) //edit data รับ parameter คือเลขบรรทัดและจำนวนที่ซื้อ
 {
     ifstream read;
     read.open("book.txt",ios::app);
@@ -255,12 +274,13 @@ void bookstore::Edit_data(int numline,int quantity)
     string line;
 
     while(getline(read,line)){
-        titleline.push_back(line);
+        titleline.push_back(line); //อ่านไฟล์แล้ว pushback ลงใน vector
     }
     read.close();
-    NewTemp(numline);
+    NewTemp(numline);   //copy book.txt
     ofstream write("book.txt");
     Title_number--;
+    
     for(int i = 0; i < titleline.size();i++){
         if(i != Title_number){
             write << titleline[i] << endl;
