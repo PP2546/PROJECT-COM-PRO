@@ -248,9 +248,9 @@ void bookstore::Buy_book()
             b.CheckUser(come , Totalquantity);
             cout << "-------------------------------------\n";
             cout << "Total Books : " << Totalquantity << endl;
-            cout << "Discount : " << Discount <<" %\n"; // Discount
-            cout << "Discounted price : " << (TotalCost*Discount)/100 <<" Bath\n\n"; // Discount price
-            cout << "Total cost : " << TotalCost-(TotalCost*Discount)/100 << " Bath \n"; // Total cost
+            cout << "Discount : " << b.Discount <<" %\n"; // Discount
+            cout << "Discounted price : " << (TotalCost*b.Discount)/100 <<" Bath\n\n"; // Discount price
+            cout << "Total cost : " << TotalCost-(TotalCost*b.Discount)/100 << " Bath \n"; // Total cost
             cout << "*****************************************\n";
             cout << "*                                       *\n";
             cout << "*            THANK YOU !!!              *\n";
