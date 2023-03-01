@@ -54,6 +54,44 @@ void bookstore::Start()
     cout << "\t  Press < 0 > to Add book to stock  \n";
 }
 
+//Function login for Staff
+void bookstore::staffLogin()
+{
+    string name , password , n , pw;
+    cout << "\n";
+    cout << "\t------------ Login ------------\n";
+    cout << "\tEnter is your username : ";
+    cin >> name;
+    cout << "\tEnter is your password : ";
+    cin >> password;
+
+    ifstream source;
+    source.open("STAFFLOGIN.txt",ios::app);
+    
+    while(source >> n >> pw)
+    {
+        if(n == name && pw == password)
+        {
+            come = 1;
+        }
+    }
+
+    source.close();
+
+    if(come == 1)
+    {
+        cout << "\nLogin successfaul ++\n\n";
+        cout << "Hello , " << name << " What would you like to do?\n";
+        cin.get();
+    }
+    else
+    {
+        cout << "\nLogin failed , please try again.\n ";
+        cin.get(); 
+        staffLogin();     
+    }
+}
+
 // Function Login
 void bookstore::Login()
 {
@@ -308,6 +346,7 @@ void bookstorerecord()
 		switch (choice_start){
 
 		case 0:
+				b.staffLogin();
             b.Control_panelForStaff();
             cout << "\nWhat is your answer : ";
 		    cin >> choice_staff;
