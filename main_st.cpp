@@ -17,6 +17,7 @@ void bookstorerecord()
 		switch (choice_start){
 
 		case 0:
+			b.staffLogin();
             b.Control_panelForStaff();
             cout << "\nWhat is your answer : ";
 		    cin >> choice_staff;
@@ -108,4 +109,6 @@ int main()
 	bookstorerecord();
 
 	return 0;
+	
 }
+
