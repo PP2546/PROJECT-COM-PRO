@@ -195,7 +195,6 @@ void bookstore::Data_book(int xorder) // ข้อมูลตั้งต้น
         cout << "\n\t---------- add a book ----------\n";
         cout << "\n\tEnter Title name : ";
         getline(cin,title);
-        cout << "\tTitle: " ;
         write << title << ":";
         
         cout << "\tEnter price : ";
