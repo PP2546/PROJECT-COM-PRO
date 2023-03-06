@@ -1,0 +1,61 @@
+#include<windows.h>
+#include<stdio.h>
+
+void AddMenus(HWND);
+
+HMENU hmenu;
+
+LRESULT CALLBACK WndProc(HWND,UINT,WPARAM,LPARAM);
+
+int WINAPI WinMain(HINSTANCE hinst, HINSTANCE hprev, LPSTR args, int cmdshow){
+    MSG msg;
+    WNDCLASSW c = {0};
+    HWND hwnd;
+
+    memset(&c,0,sizeof(c));
+    c.hbrBackground = (HBRUSH)COLOR_WINDOW;
+    c.hCursor = LoadCursor(NULL,IDC_ARROW);
+    c.hInstance = hinst;
+    c.lpszClassName = L"MyWindowClass";
+    c.lpfnWndProc = WndProc;
+
+    if(!RegisterClassW(&c)){
+        MessageBox(NULL,"Fail","Failure",MB_OK);
+        return -1;
+    }
+
+    CreateWindowW(L"MyWindowClass",L"My window",WS_OVERLAPPEDWINDOW | WS_VISIBLE,100,100,300,300,NULL,NULL,NULL,NULL);
+
+    while(GetMessage(&msg,NULL,NULL,NULL)){
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
+    return 0;
+}
+LRESULT CALLBACK WndProc(HWND hnd,UINT message,WPARAM wparam,LPARAM lparam){
+    switch(message){
+        case WM_COMMAND:
+            switch(wparam){
+                case 1:
+                    MessageBeep(MB_OK);
+                    break;
+            }
+            break;
+        case WM_CREATE:
+            AddMenus(hnd);
+            break;
+        case WM_DESTROY:
+            PostQuitMessage(0);
+            break;
+        default:
+            return DefWindowProc (hnd,message,wparam,lparam);
+    }
+    return 0;
+}
+
+void AddMenus(HWND hnd){
+    hmenu = CreateMenu();
+    AppendMenu(hmenu,MF_STRING,1,"File");
+    SetMenu(hnd,hmenu);
+
+}
