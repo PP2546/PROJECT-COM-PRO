@@ -164,6 +164,7 @@ void bookstore::CheckUser(int x ,int T)
 void bookstore::Control_panelForStaff()
 {
     cout << "\n";
+    system("cls");
     cout << "\t  Press < 1 > to Add book" << endl;
     cout << "\t  Press < 2 > to Exit" << endl;
 }
@@ -171,35 +172,41 @@ void bookstore::Control_panelForStaff()
 // Function to display the menus
 void bookstore::Control_panel()
 {
+    cout << "\n";
     cout << "\t  Press < 1 > to Buy a book" << endl;
     cout << "\t  Press < 2 > to Show all books" << endl;
     cout << "\t  Press < 3 > to Exit" << endl;
+
 }
 
 
 // Function Show all book
 void bookstore::Show_book() // การแสดงข้อมูล
 {   
+    system("cls");
     ifstream read;
     read.open("book.txt",ios::app);
     string textline;
     int i = 1;
     int s;
     float Pr;
+    cout << "\n************************************************************************************\n";
+    cout << "\tNumber ID\tTitle\t\t\tPrice ( Bath )\t\tStock\n";
+    cout << "************************************************************************************\n";
     while(getline(read,textline))
     {
         char title[100];
         sscanf(textline.c_str(),"%[^:]: %f %d",title,&Pr,&s);
-        cout << "\t  -------------------------------\n";
-        cout << "\t  Number ID : " << i << endl;
-        cout << "\t\t  "<< title << endl; 
-        cout << "\t\t  Price: " << Pr << " Bath" << endl;
-        cout << "\t\t  Stock: " << s << endl;
+        cout <<"\t"<< i ;
+        cout <<"\t\t"<< title ; 
+        cout <<"\t\t"<< Pr ;
+        cout << "\t\t\t"<< s ;
         price[i] = Pr;
         stock[i] = s;
         i++;
+        cout << "\n\n" ;
     }
-    cout << "\t  -------------------------------\n";
+    cout << "**********************************************************************************\n";
 }
 
 
