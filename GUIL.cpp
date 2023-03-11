@@ -11,7 +11,7 @@ LRESULT CALLBACK WndProc(HWND,UINT , WPARAM ,LPARAM);
 char textSaved1[20];
 char textSaved2[20];
 int count = 1,log = 1;
-HWND textfield,button,buttonX,TextBox1,TextBox2,check;
+HWND textfield,button,buttonX,TextBox1,TextBox2,check,textsaved;
 string id,pass;
 /* The 'main' function of Win32 GUI programs: this is where execution starts */
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
@@ -72,12 +72,14 @@ LRESULT CALLBACK WndProc(HWND hwnd,UINT message, WPARAM wParam,LPARAM lParam){
 				TextBox1 = CreateWindow("EDIT"," ",WS_BORDER|WS_CHILD|WS_VISIBLE,100,150,250,25,hwnd,NULL,NULL,NULL);
 				TextBox2 = CreateWindow("EDIT"," ",WS_BORDER|WS_CHILD|WS_VISIBLE,100,200,250,25,hwnd,NULL,NULL,NULL);
 				button = CreateWindow("BUTTON","Login",WS_VISIBLE|WS_CHILD|WS_BORDER,100,250,50,30,hwnd,(HMENU) 2,NULL,NULL);
+				button = CreateWindow("BUTTON","Register",WS_VISIBLE|WS_CHILD|WS_BORDER,100,300,50,30,hwnd,(HMENU) 3,NULL,NULL);
 			}
 			else if(count == 2){
 				textfield = CreateWindow("STATIC","Resgister",WS_VISIBLE|WS_CHILD,100,50,100,25,hwnd,NULL,NULL,NULL);
 				TextBox1 = CreateWindow("EDIT"," ",WS_BORDER|WS_CHILD|WS_VISIBLE,100,150,250,25,hwnd,NULL,NULL,NULL);
 				TextBox2 = CreateWindow("EDIT"," ",WS_BORDER|WS_CHILD|WS_VISIBLE,100,200,250,25,hwnd,NULL,NULL,NULL);
 				button = CreateWindow("BUTTON","Resgister",WS_VISIBLE|WS_CHILD|WS_BORDER,100,250,80,30,hwnd,(HMENU) 1,NULL,NULL);
+				button = CreateWindow("BUTTON","Register",WS_VISIBLE|WS_CHILD|WS_BORDER,100,300,50,30,hwnd,(HMENU) 3,NULL,NULL);
 			}
 				break;
 			case WM_COMMAND:
@@ -90,6 +92,7 @@ LRESULT CALLBACK WndProc(HWND hwnd,UINT message, WPARAM wParam,LPARAM lParam){
         			dest.open("records.txt",ios::app) ;
         			dest << id << endl << pass << endl ;
         			dest.close();
+					MessageBox(NULL, "Resgister","Success",MB_ICONEXCLAMATION|MB_OK);
 				}
 				else if(LOWORD(wParam) == 2){
 					string name,pw;
@@ -98,11 +101,18 @@ LRESULT CALLBACK WndProc(HWND hwnd,UINT message, WPARAM wParam,LPARAM lParam){
     
    					while(getline(read,name) && getline(read,pw)){
         				if(name == id && pw == pass){
-							check = CreateWindow("STATIC","Success",WS_VISIBLE|WS_BORDER|WS_CHILD,250,250,100,30,hwnd,NULL,NULL,NULL);
-        				}else{
-							check = CreateWindow("STATIC","Fail",WS_VISIBLE|WS_BORDER|WS_CHILD,250,250,100,30,hwnd,NULL,NULL,NULL);
+							//check = CreateWindow("STATIC","Success",WS_VISIBLE|WS_BORDER|WS_CHILD,250,250,100,30,hwnd,NULL,NULL,NULL);
+							MessageBox(NULL, "Login","Success",MB_ICONEXCLAMATION|MB_OK);
+						}else{
+							//check = CreateWindow("STATIC","Fail",WS_VISIBLE|WS_BORDER|WS_CHILD,250,250,100,30,hwnd,NULL,NULL,NULL);
+							MessageBox(NULL, "Window Creation Failed!","Error!",MB_ICONEXCLAMATION|MB_OK);
         				}
 					}
+				}
+				else if(LOWORD(wParam) == 3){
+					count == 2;
+					DestroyWindow(0);
+					return DefWindowProc (hwnd,message,wParam,lParam);
 				}
 				break;
 			case WM_DESTROY:
