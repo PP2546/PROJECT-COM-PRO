@@ -157,6 +157,7 @@ void bookstore::Register()
 void bookstore::CheckUser(int x ,int T)
 {
     if(x == 1 && T >= 5 ) Discount = 10;
+    else if (x == 1 && T < 5 ) Discount = 0;
     else if (x == 0) Discount = 0;
 }
 
