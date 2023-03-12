@@ -7,6 +7,7 @@ void bookstorerecord()
     int choice_control;
     int choice_staff;
     int order_add;
+    int bookStock;
 	bookstore b;
 
 	while (1) {
@@ -17,27 +18,38 @@ void bookstorerecord()
 		switch (choice_start){
 
 		case 0:
-			b.staffLogin();
-            b.Control_panelForStaff();
-            cout << "\nWhat is your answer : ";
-		    cin >> choice_staff;
-            if(choice_staff == 2) exit(0);
-
-            cout << "How many orders will you add? : ";
-            cin >> order_add;
-            while (1)
-            {   
-                switch (choice_staff)
-                {   
-                    case 1:
-                        b.Data_book(order_add);
-                    case 2: 
-                        exit(0);
-                    default:
-                        cout << "\nxxxxx INVALID CHOICE xxxxx \n";
-                        exit(0);
+				b.staffLogin();
+                b.Control_panelForStaff();
+                cout << "\nWhat is your answer : ";
+		        cin >> choice_staff;
+                if (choice_staff == 1) {
+                    cout << "How many orders will you add? : ";
+                    cin >> order_add;
+                    while (1)
+                    {   
+                        switch (choice_staff)
+                        {   
+                            case 1:
+                                b.Data_book(order_add);
+                            case 2: 
+                                exit(0);
+                            default:
+                                cout << "\nxxxxx INVALID CHOICE xxxxx \n";
+                                exit(0);
+                        }
+                    }
                 }
-            }
+                else if (choice_staff == 2) {
+                    b.Show_book();
+                    cout << "Which book you want to add? : ";
+                    cin >> order_add;
+                    cout << "How many books do you add?  : ";
+                    cin >> bookStock;
+                    b.Edit_dataForStaff(order_add,bookStock);
+                    exit(0);
+                
+                }
+                else if(choice_staff == 3) exit(0);
 
         case 1:
 			b.Login();
