@@ -5,13 +5,13 @@
 #include<cstdlib>
 #include <string>
 using namespace std;
-/* This is where all the input to the window goes to */
 LRESULT CALLBACK WndProc(HWND,UINT , WPARAM ,LPARAM);
 
-char textSaved1[20];
-char textSaved2[20];
-int count = 1,log = 1;
-HWND textfield,button,buttonX,TextBox1,TextBox2,check,textsaved;
+char textSaved1[256];
+char textSaved2[256];
+string id1,pass1;
+int count = 1,log = 1,come = 0;
+HWND textfield,button,buttonX,TextBox1,TextBox2,check,textsaved,yoyo;
 string id,pass;
 /* The 'main' function of Win32 GUI programs: this is where execution starts */
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
@@ -19,14 +19,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	HWND hwnd; /* A 'HANDLE', hence the H, or a pointer to our window */
 	MSG msg; /* A temporary location for all messages */
 
-	/* zero out the struct and set the stuff we want to modify */
 	memset(&wc,0,sizeof(wc));
 	wc.cbSize	 = sizeof(WNDCLASSEX);
 	wc.lpfnWndProc	 = WndProc; /* This is where we will send messages to */
 	wc.hInstance	 = hInstance;
 	wc.hCursor	 = LoadCursor(NULL, IDC_ARROW);
 	
-	/* White, COLOR_WINDOW is just a #define for a system color, try Ctrl+Clicking it */
 	wc.hbrBackground = (HBRUSH)(COLOR_WINDOW+16);
 	wc.lpszClassName = "WindowClass";
 	wc.hIcon	 = LoadIcon(NULL, IDI_APPLICATION); /* Load a standard icon */
@@ -37,20 +35,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		return 0;
 	}
 
-	hwnd = CreateWindowEx(
-		WS_EX_CLIENTEDGE,
-		"WindowClass",
-		"Library",
-		WS_VISIBLE|WS_SYSMENU,
-		CW_USEDEFAULT, /* x */
-		CW_USEDEFAULT, /* y */
-		500, /* width */
-		500, /* height */
-		NULL,
-		NULL,
-		hInstance,
-		NULL
-		);
+	hwnd = CreateWindowEx(WS_EX_CLIENTEDGE,"WindowClass","Library",WS_VISIBLE|WS_SYSMENU,CW_USEDEFAULT,CW_USEDEFAULT,500,500,NULL,NULL,hInstance,NULL);
 
 	if(hwnd == NULL) {
 		MessageBox(NULL, "Window Creation Failed!","Error!",MB_ICONEXCLAMATION|MB_OK);
@@ -79,18 +64,18 @@ LRESULT CALLBACK WndProc(HWND hwnd,UINT message, WPARAM wParam,LPARAM lParam){
 				TextBox1 = CreateWindow("EDIT"," ",WS_BORDER|WS_CHILD|WS_VISIBLE,100,150,250,25,hwnd,NULL,NULL,NULL);
 				TextBox2 = CreateWindow("EDIT"," ",WS_BORDER|WS_CHILD|WS_VISIBLE,100,200,250,25,hwnd,NULL,NULL,NULL);
 				button = CreateWindow("BUTTON","Resgister",WS_VISIBLE|WS_CHILD|WS_BORDER,100,250,80,30,hwnd,(HMENU) 1,NULL,NULL);
-				button = CreateWindow("BUTTON","Register",WS_VISIBLE|WS_CHILD|WS_BORDER,100,300,50,30,hwnd,(HMENU) 3,NULL,NULL);
+				button = CreateWindow("BUTTON","Login",WS_VISIBLE|WS_CHILD|WS_BORDER,100,300,50,30,hwnd,(HMENU) 3,NULL,NULL);
 			}
 				break;
 			case WM_COMMAND:
 				if(LOWORD(wParam)!=0){
-					id = GetWindowText(TextBox1,&textSaved1[0],20);
-					pass = GetWindowText(TextBox2,&textSaved2[0],20);
+					id = GetWindowText(TextBox1,textSaved1,256);
+					pass = GetWindowText(TextBox2,textSaved2,256);
 				}
 				if(LOWORD(wParam) == 1){
         			ofstream dest;
-        			dest.open("records.txt",ios::app) ;
-        			dest << id << endl << pass << endl ;
+    				dest.open("records.txt",ios::app);
+   					dest << textSaved1 << textSaved2 << endl;
         			dest.close();
 					MessageBox(NULL, "Resgister","Success",MB_ICONEXCLAMATION|MB_OK);
 				}
@@ -99,15 +84,19 @@ LRESULT CALLBACK WndProc(HWND hwnd,UINT message, WPARAM wParam,LPARAM lParam){
 					ifstream read;
    					read.open("records.txt",ios::app);
     
-   					while(getline(read,name) && getline(read,pw)){
-        				if(name == id && pw == pass){
+   					while(read >> name >> pw){
+						if(strcmp(textSaved1,name.c_str()) && strcmp(textSaved2,pw.c_str())){
+							come = 1;
+						}
+
+					}
+					if(come == 1){
 							//check = CreateWindow("STATIC","Success",WS_VISIBLE|WS_BORDER|WS_CHILD,250,250,100,30,hwnd,NULL,NULL,NULL);
-							MessageBox(NULL, "Login","Success",MB_ICONEXCLAMATION|MB_OK);
+							MessageBox(NULL, "Success","Login",MB_ICONEXCLAMATION|MB_OK);
 						}else{
 							//check = CreateWindow("STATIC","Fail",WS_VISIBLE|WS_BORDER|WS_CHILD,250,250,100,30,hwnd,NULL,NULL,NULL);
-							MessageBox(NULL, "Window Creation Failed!","Error!",MB_ICONEXCLAMATION|MB_OK);
+							MessageBox(NULL, "Window Creation Failed!","Error",MB_ICONEXCLAMATION|MB_OK);
         				}
-					}
 				}
 				else if(LOWORD(wParam) == 3){
 					count == 2;
