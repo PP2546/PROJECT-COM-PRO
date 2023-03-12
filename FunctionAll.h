@@ -157,9 +157,9 @@ void bookstore::Register()
 // Function check user
 void bookstore::CheckUser(int x ,int T)
 {
-    if(x == 1 && T >= 5 ) Discount = 10;
-    else if (x == 1 && T < 5 ) Discount = 0;
-    else if (x == 0) Discount = 0;
+    if(x == 1 && T >= 5 ) Discount = 10;  // ถ้าเป็นสมาชิก เเละ ซื้อ 5 เล่มขึ้นไป ลด 10 %
+    else if (x == 1 && T < 5 ) Discount = 0; // ถ้าเป็นสมาชิกเเล้วซื้อไม่ถึง  5 เล่ม ยังไม่ได้ส่วนลด
+    else if (x == 0) Discount = 0; // ถ้าผู้ใช้ไม่ได้สมัครสมาชิก (เข้าใช้งาน เเบบ Incognito Mode) จะไม่ได้ส่วนลดใดๆ
 }
 
 // Function Control panel for staff
