@@ -39,6 +39,7 @@ class bookstore {
         void Show_book();
         void Data_book(int);
         void Edit_data(int,int);
+        void Edit_dataForStaff(int,int);
 };
 
 // Function to display first page
@@ -156,50 +157,59 @@ void bookstore::Register()
 // Function check user
 void bookstore::CheckUser(int x ,int T)
 {
-    if(x == 1 && T >= 5 ) Discount = 10;
-    else if (x == 0) Discount = 0;
+    if(x == 1 && T >= 5 ) Discount = 10;  // ถ้าเป็นสมาชิก เเละ ซื้อ 5 เล่มขึ้นไป ลด 10 %
+    else if (x == 1 && T < 5 ) Discount = 0; // ถ้าเป็นสมาชิกเเล้วซื้อไม่ถึง  5 เล่ม ยังไม่ได้ส่วนลด
+    else if (x == 0) Discount = 0; // ถ้าผู้ใช้ไม่ได้สมัครสมาชิก (เข้าใช้งาน เเบบ Incognito Mode) จะไม่ได้ส่วนลดใดๆ
 }
 
 // Function Control panel for staff
 void bookstore::Control_panelForStaff()
 {
     cout << "\n";
-    cout << "\t  Press < 1 > to Add book" << endl;
-    cout << "\t  Press < 2 > to Exit" << endl;
+    system("cls");
+    cout << "\t  Press < 1 > to Add new book" << endl;
+    cout << "\t  Press < 2 > to Add old book to stock" << endl;
+    cout << "\t  Press < 3 > to Exit" << endl;
 }
 
 // Function to display the menus
 void bookstore::Control_panel()
 {
+    cout << "\n";
     cout << "\t  Press < 1 > to Buy a book" << endl;
     cout << "\t  Press < 2 > to Show all books" << endl;
     cout << "\t  Press < 3 > to Exit" << endl;
+
 }
 
 
 // Function Show all book
 void bookstore::Show_book() // การแสดงข้อมูล
 {   
+    system("cls");
     ifstream read;
     read.open("book.txt",ios::app);
     string textline;
     int i = 1;
     int s;
     float Pr;
+    cout << "\n************************************************************************************\n";
+    cout << "\tNumber ID\tTitle\t\t\tPrice ( Bath )\t\tStock\n";
+    cout << "************************************************************************************\n";
     while(getline(read,textline))
     {
         char title[100];
         sscanf(textline.c_str(),"%[^:]: %f %d",title,&Pr,&s);
-        cout << "\t  -------------------------------\n";
-        cout << "\t  Number ID : " << i << endl;
-        cout << "\t\t  "<< title << endl; 
-        cout << "\t\t  Price: " << Pr << " Bath" << endl;
-        cout << "\t\t  Stock: " << s << endl;
+        cout <<"\t"<< i ;
+        cout <<"\t\t"<< title ; 
+        cout <<"\t\t"<< Pr ;
+        cout << "\t\t\t"<< s ;
         price[i] = Pr;
         stock[i] = s;
         i++;
+        cout << "\n\n" ;
     }
-    cout << "\t  -------------------------------\n";
+    cout << "**********************************************************************************\n";
 }
 
 
@@ -330,3 +340,29 @@ void bookstore::Edit_data(int numline,int quantity) //edit data รับ parame
     write.close();
 }
 
+void bookstore::Edit_dataForStaff(int numline,int quantity) 
+{
+    ifstream read;
+    read.open("book.txt",ios::app);
+
+    int Title_number = numline;
+    vector<string> titleline;
+    string line;
+
+    while(getline(read,line)){
+        titleline.push_back(line); //อ่านไฟล์แล้ว pushback ลงใน vector
+    }
+    read.close();
+    NewTemp(numline);   //copy book.txt
+    ofstream write("book.txt");
+    Title_number--;
+    
+    for(int i = 0; i < titleline.size();i++){
+        if(i != Title_number){
+            write << titleline[i] << endl;
+        } else{
+            write << TitleEdit << ":" << PriceEdit << " " << StockEdit+quantity << endl; //add to stock 
+        }
+    }
+    write.close();
+}
