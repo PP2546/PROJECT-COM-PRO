@@ -3,6 +3,7 @@
 #include<cstdlib>
 #include<string>
 #include<vector>
+#include<iomanip>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -193,23 +194,23 @@ void bookstore::Show_book() // การแสดงข้อมูล
     int i = 1;
     int s;
     float Pr;
-    cout << "\n************************************************************************************\n";
-    cout << "\tNumber ID\tTitle\t\t\tPrice ( Bath )\t\tStock\n";
-    cout << "************************************************************************************\n";
+    cout << "\n***************************************************************************************\n";
+    cout << left << setw(16) << "Number ID" << setw(42) << "Title" << setw(24) << "Price ( Bath )" << setw(0) << "Stock" << "\n";
+    cout << "***************************************************************************************\n";
     while(getline(read,textline))
     {
         char title[100];
         sscanf(textline.c_str(),"%[^:]: %f %d",title,&Pr,&s);
-        cout <<"\t"<< i ;
-        cout <<"\t\t"<< title ; 
-        cout <<"\t\t"<< Pr ;
-        cout << "\t\t\t"<< s ;
+        cout << left << setw(16) << i ;
+        cout << setw(42) << title ; 
+        cout << setw(24) << Pr ;
+        cout << setw(0) << s ;
         price[i] = Pr;
         stock[i] = s;
         i++;
         cout << "\n\n" ;
     }
-    cout << "**********************************************************************************\n";
+    cout << "*************************************************************************************\n";
 }
 
 
