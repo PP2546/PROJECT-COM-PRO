@@ -361,7 +361,7 @@ void bookstore::Edit_dataForStaff(int numline,int quantity)
         if(i != Title_number){
             write << titleline[i] << endl;
         } else{
-            write << TitleEdit << ":" << PriceEdit << " " << StockEdit+quantity << endl; //add to stock
+            write << TitleEdit << ":" << PriceEdit << " " << StockEdit+quantity << endl; //add to stock 
         }
     }
     write.close();

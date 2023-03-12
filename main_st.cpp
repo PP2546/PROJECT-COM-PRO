@@ -45,7 +45,7 @@ void bookstorerecord()
                     cin >> order_add;
                     cout << "How many books do you add?  : ";
                     cin >> bookStock;
-                    b.Edit_dataForStaff(order_add,bookStock);
+                    b.Edit_dataForStaff(order_add,bookStock); 
                     exit(0);
                 
                 }
