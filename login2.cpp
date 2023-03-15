@@ -38,7 +38,7 @@ void Login()
     {
         system("CLS");
         cout << "Invalid username or password!!\n";
-        Login(); //เมื่อรหัสผิดให้เรียกใช้ตัวเองใหม่ในการ login  **ยังไม่แน่ใจว่าถ้าใส่ผิดไปเรื่อยๆมันจะเรียกใช้ตัวเองไปเรื่อยจนแลคป่าวนะ**
+        Login(); //เมื่อรหัสผิดให้เรียกใช้ตัวเองใหม่ในการ login  **ยังไม่แน่ใจว่าถ้าใส่ผิดไปเรื่อยๆมันจะเรียกใช้ตัวเองไปเรื่อยจนแลครึป่าวนะครับ**
         cin.get();      
     }
 }
@@ -47,7 +47,7 @@ void Login()
 void Register()
 {
     string name , password;
-    //กรอกชื่อและรหัสเพื่อสมัคร
+    //กรอกชื่อและรหัสเพื่อสมัครบัญชี
     cout << "--------Register-------\n";
     cout << "What is your username? :: ";
     cin >> name;
@@ -61,7 +61,7 @@ void Register()
     
     cout << "DONE!!!\n";
     system("CLS");
-    Login(); //ให้ login ต่อเลย
+    Login(); //ให้ login ได้ต่อเลย
   
 }
 
@@ -72,7 +72,7 @@ int main()
     cout << "**********************************************\n";
     cout << "1.Login  \n" << "2.Register  \n" << "What is your answer : ";
     cin >> choose;
-    system("CLS"); //clear console screen
+    system("CLS"); //clear console screen !!!
 
     if(choose == 1) Login();
     else if(choose == 2) Register();
