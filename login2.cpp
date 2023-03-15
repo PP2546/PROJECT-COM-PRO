@@ -8,7 +8,7 @@ void Login()
 {
     int come;
     string name , password , n , pw;
-    cout << "--------Login-------\n";
+    cout << "---------Login--------\n";
     cout << "Enter is your username : ";
     cin >> name;
     cout << "Enter is your password : ";
