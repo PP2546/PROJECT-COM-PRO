@@ -50,6 +50,10 @@ void bookstorerecord()
                 
                 }
                 else if(choice_staff == 3) exit(0);
+                else {
+                    cout << "\nxxxxx INVALID CHOICE xxxxx \n";
+                    exit(0);
+                }
 
         case 1:
 			b.Login();
@@ -72,6 +76,8 @@ void bookstorerecord()
                     exit(0);
                     break;;               
                 default:
+                    cout << "\nxxxxx INVALID CHOICE xxxxx \n";
+                    exit(0);
                     break;
                 }
                
@@ -100,8 +106,10 @@ void bookstorerecord()
                     break;              
                 case 3:
                     exit(0);
-                    break;;             
+                    break;             
                 default:
+                    cout << "\nxxxxx INVALID CHOICE xxxxx \n";
+                    exit(0);
                     break;
                 }
             }
