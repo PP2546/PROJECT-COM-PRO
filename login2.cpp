@@ -49,10 +49,10 @@ void Register()
     string name , password;
     //กรอกชื่อและรหัสเพื่อสมัคร
     cout << "--------Register-------\n";
-    cout << "What is your username? : ";
+    cout << "What is your username? :: ";
     cin >> name;
     
-    cout << "What is your password? : ";
+    cout << "What is your password? :: ";
     cin >> password;
     
     ofstream dest;
