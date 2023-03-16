@@ -271,70 +271,46 @@ void bookstore::Buy_book()
     cout << "\n\t  --------- Buy a books ---------\n";
     cout << "\nChoose the number ID of books : ";
     cin >> bookID;
-    cout << "How many books do you want to buy? : ";
-    cin >> quantity_buy_book;
-    system("cls");
-
-
-    if(quantity_buy_book <= b.stock[bookID]) // สินค้ายังเหลือ/พอดี
+    
+    ifstream read;
+    read.open("book.txt",ios::app);
+    
+    if(bookID >........)
     {
-        b.Edit_data(bookID,quantity_buy_book);
-        stock[bookID] -= quantity_buy_book; // ของในคลังที่ถูกออกไปขาย
-        double cost = b.price[bookID]*quantity_buy_book;
-        TotalCost = TotalCost + cost;
-        Totalquantity = Totalquantity + quantity_buy_book;
-        cout << "\nCost : " << cost << " Bath\n"; // Cost
-        cout << "-------------------------------------\n";
-        cout << "\nTotal Books : " << Totalquantity;
-        cout << "\nTotal cost : " << TotalCost << " Bath \n\n"; // Total cost
-        cout << "-------------------------------------\n";
-        cout << "Do you want to buy another book? <Y/N> :";
-        cin >> Answer;
-        system("cls");
-        if(Answer == 'Y'){
-            Buy_book();
-        }else{
-            b.CheckUser(come , Totalquantity);
-            cout << "-------------------------------------\n";
-            cout << "Total Books : " << Totalquantity << endl;
-            cout << "Discount : " << b.Discount <<" %\n"; // Discount
-            cout << "Discounted price : " << (TotalCost*b.Discount)/100 <<" Bath\n\n"; // Discount price
-            cout << "Total cost : " << TotalCost-(TotalCost*b.Discount)/100 << " Bath \n"; // Total cost
-            cout << "*****************************************\n";
-            cout << "*                                       *\n";
-            cout << "*            THANK YOU !!!              *\n";
-            cout << "*                                       *\n";
-            cout << "*****************************************\n";
-        }
+        cout << "fail,please try again\n";
+        Buy_book();
     }
-    else if(quantity_buy_book > b.stock[bookID])
+    else
     {
-        if(b.stock[bookID]== 0)
+        cout << "How many books do you want to buy? : ";
+        cin >> quantity_buy_book;
+        system("cls");
+
+
+        if(quantity_buy_book <= b.stock[bookID]) // สินค้ายังเหลือ/พอดี
         {
-            cout << "           Sorry , Sold out!!!       \n";
+            b.Edit_data(bookID,quantity_buy_book);
+            stock[bookID] -= quantity_buy_book; // ของในคลังที่ถูกออกไปขาย
+            double cost = b.price[bookID]*quantity_buy_book;
+            TotalCost = TotalCost + cost;
+            Totalquantity = Totalquantity + quantity_buy_book;
+            cout << "\nCost : " << cost << " Bath\n"; // Cost
+            cout << "-------------------------------------\n";
+            cout << "\nTotal Books : " << Totalquantity;
+            cout << "\nTotal cost : " << TotalCost << " Bath \n\n"; // Total cost
             cout << "-------------------------------------\n";
             cout << "Do you want to buy another book? <Y/N> :";
             cin >> Answer;
             system("cls");
-            
-            if(Answer == 'Y') Buy_book();
-            else{
-                cout << "*****************************************\n";
-                cout << "*                                       *\n";
-                cout << "*            THANK YOU !!!              *\n";
-                cout << "*                                       *\n";
-                cout << "*****************************************\n";
-            }
-        }
-        else 
-        {
-            cout << "We have " << b.stock[bookID] << " book\n";
-            cout << "-------------------------------------\n";
-            cout << "Do you want to buy this book? <Y/N> :";
-            cin >> Answer;
             if(Answer == 'Y'){
                 Buy_book();
             }else{
+                b.CheckUser(come , Totalquantity);
+                cout << "-------------------------------------\n";
+                cout << "Total Books : " << Totalquantity << endl;
+                cout << "Discount : " << b.Discount <<" %\n"; // Discount
+                cout << "Discounted price : " << (TotalCost*b.Discount)/100 <<" Bath\n\n"; // Discount price
+                cout << "Total cost : " << TotalCost-(TotalCost*b.Discount)/100 << " Bath \n"; // Total cost
                 cout << "*****************************************\n";
                 cout << "*                                       *\n";
                 cout << "*            THANK YOU !!!              *\n";
@@ -342,7 +318,42 @@ void bookstore::Buy_book()
                 cout << "*****************************************\n";
             }
         }
-        
+        else if(quantity_buy_book > b.stock[bookID])
+        {
+            if(b.stock[bookID]== 0)
+            {
+                cout << "           Sorry , Sold out!!!       \n";
+                cout << "-------------------------------------\n";
+                cout << "Do you want to buy another book? <Y/N> :";
+                cin >> Answer;
+                system("cls");
+            
+                if(Answer == 'Y') Buy_book();
+                else{
+                    cout << "*****************************************\n";
+                    cout << "*                                       *\n";
+                    cout << "*            THANK YOU !!!              *\n";
+                    cout << "*                                       *\n";
+                    cout << "*****************************************\n";
+                }
+            }
+            else 
+            {
+                cout << "We have " << b.stock[bookID] << " book\n";
+                cout << "-------------------------------------\n";
+                cout << "Do you want to buy this book? <Y/N> :";
+                cin >> Answer;
+                if(Answer == 'Y'){
+                    Buy_book();
+                }else{
+                    cout << "*****************************************\n";
+                    cout << "*                                       *\n";
+                    cout << "*            THANK YOU !!!              *\n";
+                    cout << "*                                       *\n";
+                    cout << "*****************************************\n";
+                }
+            }  
+        }
     }
 }
 
