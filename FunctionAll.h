@@ -342,11 +342,7 @@ void bookstore::Buy_book()
                 cout << "*****************************************\n";
             }
         }
-        else
-        {
-            cout << "\nfailed , please try again.\n ";
-            Buy_book();
-        }
+        
     }
 }
 
