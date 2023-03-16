@@ -309,7 +309,29 @@ void bookstore::Buy_book()
     }
     else
     {
-        cout << "Sorry , Sold out"; 
+        if(b.stock[bookID]== 0) cout << "Sorry , Sold out";
+        else 
+        {
+            cout << "We have " << b.stock[bookID] << " book";
+            cout << "-------------------------------------\n";
+            cout << "Do you want to buy this book? <Y/N> :";
+            cin >> Answer;
+            if(Answer == 'Y'){
+                Buy_book();
+            }else{
+                b.CheckUser(come , Totalquantity);
+                cout << "-------------------------------------\n";
+                cout << "Total Books : " << Totalquantity << endl;
+                cout << "Discount : " << b.Discount <<" %\n"; // Discount
+                cout << "Discounted price : " << (TotalCost*b.Discount)/100 <<" Bath\n\n"; // Discount price
+                cout << "Total cost : " << TotalCost-(TotalCost*b.Discount)/100 << " Bath \n"; // Total cost
+                cout << "*****************************************\n";
+                cout << "*                                       *\n";
+                cout << "*            THANK YOU !!!              *\n";
+                cout << "*                                       *\n";
+                cout << "*****************************************\n";
+            }
+        }
     }
 }
 
