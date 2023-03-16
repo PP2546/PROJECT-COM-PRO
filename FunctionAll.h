@@ -307,7 +307,7 @@ void bookstore::Buy_book()
             cout << "*****************************************\n";
         }
     }
-    else
+    else if(quantity_buy_book > b.stock[bookID])
     {
         if(b.stock[bookID]== 0)
         {
@@ -341,6 +341,11 @@ void bookstore::Buy_book()
                 cout << "*                                       *\n";
                 cout << "*****************************************\n";
             }
+        }
+        else
+        {
+            cout << "\nfailed , please try again.\n ";
+            Buy_book();
         }
     }
 }
