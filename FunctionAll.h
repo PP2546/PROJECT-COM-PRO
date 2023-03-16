@@ -268,14 +268,20 @@ void bookstore::Buy_book()
     bookstore b;
     b.Show_book();
 
+    ifstream read;
+    read.open("book.txt",ios::app);
+    string TitleLine;
+    int Titleline = 0;
+    while(getline(read,TitleLine))
+    {
+        Titleline++;
+    }
+
     cout << "\n\t  --------- Buy a books ---------\n";
     cout << "\nChoose the number ID of books : ";
     cin >> bookID;
     
-    ifstream read;
-    read.open("book.txt",ios::app);
-    
-    if(bookID >........)
+    if(bookID > Titleline)
     {
         cout << "fail,please try again\n";
         Buy_book();
