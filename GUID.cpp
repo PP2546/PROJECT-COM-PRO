@@ -15,36 +15,6 @@ int count = 1,log = 1,come = 0;
 HWND textfield,button,buttonX,TextBox1,TextBox2,check,textsaved,yoyo;
 string id,pass;
 
-void CreateNewwindow1(){
-	const char* className = "NewWindowClass";
-    const char* windowName = "Register";
-	count = 2;
-
-    // Register the window class
-    WNDCLASS wc = { 0 };
-    wc.lpfnWndProc = DefWindowProc;
-    wc.hInstance = GetModuleHandle(NULL);
-    wc.lpszClassName = className;
-    RegisterClass(&wc);	
-
-    // Create the new window
-    HWND newWindow = CreateWindowEx(WS_EX_CLIENTEDGE,className,windowName,WS_VISIBLE|WS_SYSMENU,CW_USEDEFAULT,CW_USEDEFAULT,500,500,NULL,NULL,GetModuleHandle(NULL),NULL);
-    // Show the new window
-	MSG msg = { 0 };
-    while (GetMessage(&msg, NULL, 0, 0)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-    ShowWindow(newWindow, SW_SHOW);
-	UpdateWindow(newWindow);
-}
-
-void swapWindowscreen(HWND hw){
-	ShowWindow(hw,SW_HIDE);
-	CreateNewwindow1();
-}
-
-
 /* The 'main' function of Win32 GUI programs: this is where execution starts */
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	WNDCLASSEX wc; /* A properties struct of our window */
@@ -86,21 +56,20 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 LRESULT CALLBACK WndProc(HWND hwnd,UINT message, WPARAM wParam,LPARAM lParam){
 		switch(message){
 			case WM_CREATE:
-			if(count == 1){
+			if(count == 2){
 				textfield = CreateWindow("STATIC","Login",WS_VISIBLE|WS_CHILD,100,50,100,25,hwnd,NULL,NULL,NULL);
 				TextBox1 = CreateWindow("EDIT"," ",WS_BORDER|WS_CHILD|WS_VISIBLE,100,150,250,25,hwnd,NULL,NULL,NULL);
 				TextBox2 = CreateWindow("EDIT"," ",WS_BORDER|WS_CHILD|WS_VISIBLE,100,200,250,25,hwnd,NULL,NULL,NULL);
 				button = CreateWindow("BUTTON","Login",WS_VISIBLE|WS_CHILD|WS_BORDER,100,250,50,30,hwnd,(HMENU) 2,NULL,NULL);
 				button = CreateWindow("BUTTON","Register",WS_VISIBLE|WS_CHILD|WS_BORDER,100,300,50,30,hwnd,(HMENU) 3,NULL,NULL);
 			}
-			if(count == 2){
+			if(count == 1){
 				textfield = CreateWindow("STATIC","Resgister",WS_VISIBLE|WS_CHILD,100,50,100,25,hwnd,NULL,NULL,NULL);
 				TextBox1 = CreateWindow("EDIT"," ",WS_BORDER|WS_CHILD|WS_VISIBLE,100,150,250,25,hwnd,NULL,NULL,NULL);
 				TextBox2 = CreateWindow("EDIT"," ",WS_BORDER|WS_CHILD|WS_VISIBLE,100,200,250,25,hwnd,NULL,NULL,NULL);
 				button = CreateWindow("BUTTON","Resgister",WS_VISIBLE|WS_CHILD|WS_BORDER,100,250,80,30,hwnd,(HMENU) 1,NULL,NULL);
 				button = CreateWindow("BUTTON","Login",WS_VISIBLE|WS_CHILD|WS_BORDER,100,300,50,30,hwnd,(HMENU) 4,NULL,NULL);
 			}
-			
 				break;
 			case WM_COMMAND:
 				if(LOWORD(wParam)!=0){
@@ -136,14 +105,14 @@ LRESULT CALLBACK WndProc(HWND hwnd,UINT message, WPARAM wParam,LPARAM lParam){
         				}
 				}
 				else if(LOWORD(wParam) == 3){
-					HINSTANCE hNewInstance = ShellExecute(NULL, "open", "GUID.exe", NULL, NULL, SW_SHOWNORMAL);
-					HWND hWnd = GetConsoleWindow();
-    				if (hWnd != NULL) {
-       				PostMessage(hWnd, WM_CLOSE, 0, 0);
 					PostQuitMessage(0);
-    				}
+					
+					//count = 2;
+					//swapWindowscreen(hwnd);
 				}
 				else if (LOWORD(wParam) == 4){
+                    HINSTANCE hNewInstance = ShellExecute(NULL, "open", "GUIL.exe", NULL, NULL, SW_SHOWNORMAL);
+					PostQuitMessage(0);
 
 				}
 				break;
