@@ -398,4 +398,5 @@ void bookstore::Edit_dataForStaff(int numline,int quantity)
         }
     }
     write.close();
+    b.Show_book();
 }
