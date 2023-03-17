@@ -28,7 +28,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	wc.hInstance	 = hInstance;
 	wc.hCursor	 = LoadCursor(NULL, IDC_ARROW);
 	
-	wc.hbrBackground = (HBRUSH)(COLOR_WINDOW+16);
+	wc.hbrBackground = (HBRUSH)(COLOR_WINDOW);
 	wc.lpszClassName = "WindowClass";
 	wc.hIcon	 = LoadIcon(NULL, IDI_APPLICATION); /* Load a standard icon */
 	wc.hIconSm	 = LoadIcon(NULL, IDI_APPLICATION); /* use the name "A" to use the project icon */
@@ -57,18 +57,18 @@ LRESULT CALLBACK WndProc(HWND hwnd,UINT message, WPARAM wParam,LPARAM lParam){
 		switch(message){
 			case WM_CREATE:
 			if(count == 2){
-				textfield = CreateWindow("STATIC","Login",WS_VISIBLE|WS_CHILD,100,50,100,25,hwnd,NULL,NULL,NULL);
+				textfield = CreateWindow("STATIC","Login",WS_VISIBLE|WS_CHILD|SS_CENTER,100,50,100,25,hwnd,NULL,NULL,NULL);
 				TextBox1 = CreateWindow("EDIT"," ",WS_BORDER|WS_CHILD|WS_VISIBLE,100,150,250,25,hwnd,NULL,NULL,NULL);
 				TextBox2 = CreateWindow("EDIT"," ",WS_BORDER|WS_CHILD|WS_VISIBLE,100,200,250,25,hwnd,NULL,NULL,NULL);
 				button = CreateWindow("BUTTON","Login",WS_VISIBLE|WS_CHILD|WS_BORDER,100,250,50,30,hwnd,(HMENU) 2,NULL,NULL);
 				button = CreateWindow("BUTTON","Register",WS_VISIBLE|WS_CHILD|WS_BORDER,100,300,50,30,hwnd,(HMENU) 3,NULL,NULL);
 			}
 			if(count == 1){
-				textfield = CreateWindow("STATIC","Resgister",WS_VISIBLE|WS_CHILD,100,50,100,25,hwnd,NULL,NULL,NULL);
+				textfield = CreateWindow("STATIC","Resgister",WS_VISIBLE|WS_CHILD|SS_CENTER,100,50,100,25,hwnd,NULL,NULL,NULL);
 				TextBox1 = CreateWindow("EDIT"," ",WS_BORDER|WS_CHILD|WS_VISIBLE,100,150,250,25,hwnd,NULL,NULL,NULL);
 				TextBox2 = CreateWindow("EDIT"," ",WS_BORDER|WS_CHILD|WS_VISIBLE,100,200,250,25,hwnd,NULL,NULL,NULL);
 				button = CreateWindow("BUTTON","Resgister",WS_VISIBLE|WS_CHILD|WS_BORDER,100,250,80,30,hwnd,(HMENU) 1,NULL,NULL);
-				button = CreateWindow("BUTTON","Login",WS_VISIBLE|WS_CHILD|WS_BORDER,100,300,50,30,hwnd,(HMENU) 4,NULL,NULL);
+				button = CreateWindow("BUTTON","Login Here",WS_VISIBLE|WS_CHILD|WS_BORDER,100,300,80,30,hwnd,(HMENU) 4,NULL,NULL);
 			}
 				break;
 			case WM_COMMAND:

@@ -25,6 +25,7 @@ void CreateNewwindow1(){
     wc.lpfnWndProc = DefWindowProc;
     wc.hInstance = GetModuleHandle(NULL);
     wc.lpszClassName = className;
+	wc.hbrBackground = (HBRUSH)(COLOR_WINDOW);
     RegisterClass(&wc);	
 
     // Create the new window
@@ -87,14 +88,15 @@ LRESULT CALLBACK WndProc(HWND hwnd,UINT message, WPARAM wParam,LPARAM lParam){
 		switch(message){
 			case WM_CREATE:
 			if(count == 1){
-				textfield = CreateWindow("STATIC","Login",WS_VISIBLE|WS_CHILD,100,50,100,25,hwnd,NULL,NULL,NULL);
-				TextBox1 = CreateWindow("EDIT"," ",WS_BORDER|WS_CHILD|WS_VISIBLE,100,150,250,25,hwnd,NULL,NULL,NULL);
-				TextBox2 = CreateWindow("EDIT"," ",WS_BORDER|WS_CHILD|WS_VISIBLE,100,200,250,25,hwnd,NULL,NULL,NULL);
+				textfield = CreateWindow("STATIC","Login",WS_VISIBLE|WS_CHILD|SS_CENTER,100,50,100,25,hwnd,NULL,NULL,NULL);
+				TextBox1 = CreateWindow("EDIT","",WS_BORDER|WS_CHILD|WS_VISIBLE,100,150,250,25,hwnd,NULL,NULL,NULL);
+				TextBox2 = CreateWindow("EDIT","",WS_BORDER|WS_CHILD|WS_VISIBLE,100,200,250,25,hwnd,NULL,NULL,NULL);
 				button = CreateWindow("BUTTON","Login",WS_VISIBLE|WS_CHILD|WS_BORDER,100,250,50,30,hwnd,(HMENU) 2,NULL,NULL);
-				button = CreateWindow("BUTTON","Register",WS_VISIBLE|WS_CHILD|WS_BORDER,100,300,50,30,hwnd,(HMENU) 3,NULL,NULL);
+				button = CreateWindow("BUTTON","Register Here",WS_VISIBLE|WS_CHILD|WS_BORDER,100,300,100,30,hwnd,(HMENU) 3,NULL,NULL);
+				button = CreateWindow("BUTTON","Reconite Mode",WS_VISIBLE|WS_CHILD|WS_BORDER,100,400,100,30,hwnd,(HMENU) 5,NULL,NULL);
 			}
 			if(count == 2){
-				textfield = CreateWindow("STATIC","Resgister",WS_VISIBLE|WS_CHILD,100,50,100,25,hwnd,NULL,NULL,NULL);
+				textfield = CreateWindow("STATIC","Resgister",WS_VISIBLE|WS_CHILD|SS_CENTER,100,50,100,25,hwnd,NULL,NULL,NULL);
 				TextBox1 = CreateWindow("EDIT"," ",WS_BORDER|WS_CHILD|WS_VISIBLE,100,150,250,25,hwnd,NULL,NULL,NULL);
 				TextBox2 = CreateWindow("EDIT"," ",WS_BORDER|WS_CHILD|WS_VISIBLE,100,200,250,25,hwnd,NULL,NULL,NULL);
 				button = CreateWindow("BUTTON","Resgister",WS_VISIBLE|WS_CHILD|WS_BORDER,100,250,80,30,hwnd,(HMENU) 1,NULL,NULL);
@@ -116,11 +118,13 @@ LRESULT CALLBACK WndProc(HWND hwnd,UINT message, WPARAM wParam,LPARAM lParam){
 				}
 				else if(LOWORD(wParam) == 2){
 					string name,pw;
+					string idname(textSaved1),passid(textSaved2);
 					ifstream read;
    					read.open("records.txt",ios::app);
     
    					while(read >> name >> pw){
-						if(strcmp(textSaved1,name.c_str()) && strcmp(textSaved2,pw.c_str())){
+						//if(strcmp(textSaved1,name.c_str()) and strcmp(textSaved2,pw.c_str())){
+						if(name == idname and pw == passid){
 							come = 1;
 						}
 
@@ -128,7 +132,7 @@ LRESULT CALLBACK WndProc(HWND hwnd,UINT message, WPARAM wParam,LPARAM lParam){
 					if(come == 1){
 							//check = CreateWindow("STATIC","Success",WS_VISIBLE|WS_BORDER|WS_CHILD,250,250,100,30,hwnd,NULL,NULL,NULL);
 							MessageBox(NULL, "Success","Login",MB_ICONEXCLAMATION|MB_OK);
-							HINSTANCE hNewInstance = ShellExecute(NULL, "open", "GUILeaw.exe", NULL, NULL, SW_SHOWNORMAL);
+							HINSTANCE hNewInstance = ShellExecute(NULL, "open", "GUIDEE.exe", NULL, NULL, SW_SHOWNORMAL);
 							PostQuitMessage(0);
 						}else{
 							//check = CreateWindow("STATIC","Fail",WS_VISIBLE|WS_BORDER|WS_CHILD,250,250,100,30,hwnd,NULL,NULL,NULL);
@@ -145,6 +149,11 @@ LRESULT CALLBACK WndProc(HWND hwnd,UINT message, WPARAM wParam,LPARAM lParam){
 				}
 				else if (LOWORD(wParam) == 4){
 
+				}
+				else if (LOWORD(wParam) == 5){
+					MessageBox(NULL, "Success","Regconite Mode",MB_ICONEXCLAMATION|MB_OK);
+					HINSTANCE hNewInstance = ShellExecute(NULL, "open", "GUILeaw.exe", NULL, NULL, SW_SHOWNORMAL);
+					PostQuitMessage(0);
 				}
 				break;
 			case WM_DESTROY:

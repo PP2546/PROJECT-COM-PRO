@@ -76,7 +76,6 @@ LRESULT CALLBACK WndProc(HWND hwnd,UINT message, WPARAM wParam,LPARAM lParam){
                     if(LOWORD(wParam)!=0){
 					GetWindowText(TextBox1,textSaved1,256);
 					GetWindowText(TextBox2,textSaved2,256);
-                    num = atoi(textSaved1);
                     amo = atoi(textSaved2);
 				    }
 				switch(wParam){
@@ -185,6 +184,7 @@ void buybook(int num,int amount){
                 
             }
             else{
+                CheckUser(1,amount);
                 string k;
                 k = "Totalquantity : " + to_string(TotalAmo) + "\n\n";
                 k += "Discount : " + to_string(Discount) + "%\n\n";
