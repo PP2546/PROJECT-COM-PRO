@@ -281,7 +281,7 @@ void bookstore::Buy_book()
     cout << "\nChoose the number ID of books : ";
     cin >> bookID;
     
-    if(bookID > Titleline or bookID == 0)
+    if(bookID > Titleline or bookID <= 0)
     {
         cout << "fail,please try again\n";
         Buy_book();
