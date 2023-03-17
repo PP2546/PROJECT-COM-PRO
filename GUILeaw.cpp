@@ -47,6 +47,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		MessageBox(NULL, "Window Registration Failed!","Error!",MB_ICONEXCLAMATION|MB_OK);
 		return 0;
 	}
+	
 
 	hwnd = CreateWindowEx(WS_EX_CLIENTEDGE,"WindowClass","Library",WS_OVERLAPPEDWINDOW|WS_VISIBLE|WS_SYSMENU
     ,CW_USEDEFAULT,CW_USEDEFAULT,750,500,NULL,NULL,hInstance,NULL);

@@ -22,7 +22,7 @@ string id,pass,title1[100];
 float price[100];
 int stock[100];
 void FuncShowbook();
-void buybook(int,int);
+void buybook(int,int,HWND);
 void Edit_data(int,int);
 void NewTemp(int);
 void CheckUser(int, int);
@@ -85,7 +85,7 @@ LRESULT CALLBACK WndProc(HWND hwnd,UINT message, WPARAM wParam,LPARAM lParam){
 					    MessageBeep(MB_OK);
 					break;
                     case 2:
-                        buybook(num,amo);
+                        buybook(num,amo,hwnd);
 
                     break;
                     case 3:
@@ -139,24 +139,24 @@ void FuncShowbook(){
 }
 
 void HomeMenu(HWND hwnd){
-    TextBox1 = CreateWindow("EDIT","",WS_BORDER|WS_CHILD|WS_VISIBLE|WS_VSCROLL|ES_AUTOVSCROLL|ES_MULTILINE,10,10,600,400,hwnd,NULL,NULL,NULL);
+    TextBox1 = CreateWindow("EDIT","",WS_BORDER|WS_CHILD|WS_VISIBLE|WS_VSCROLL|SS_CENTER|ES_AUTOVSCROLL|ES_MULTILINE,10,10,600,400,hwnd,NULL,NULL,NULL);
     FuncShowbook(); // call the function to read data from file and store in arrays
     stringstream ss;
     ss << "\r\n***************************************************************************************\r\n";
-    ss << left << setw(16) << "Number ID" << setw(42) << "Title" << setw(24) << "Price ( Bath )" << setw(8) << "Stock" << "\r\n";
+    ss << left << setw(16) << "Number ID" << setw(42) << "Title" << setw(24) << "Price ( Bath )" << setw(0) << "Stock" << "\r\n";
     ss << "***************************************************************************************\r\n";
     for (int i = 1; i <= count-1; i++){
         ss << left << setw(16) << i;
         ss << setw(42) << title1[i];
         ss << setw(24) << price[i];
-        ss << setw(8) << stock[i];
+        ss << setw(0) << stock[i];
         ss << "\r\n\r\n" ;
     }
     ss << "*************************************************************************************\r\n";
     SetWindowText(TextBox1, ss.str().c_str());
 }
 
-void buybook(int num,int amount){
+void buybook(int num,int amount,HWND hwnd){
     cout << num << amount;
     ifstream read;
     read.open("book.txt",ios::app);
@@ -181,8 +181,10 @@ void buybook(int num,int amount){
             mb += "TotalBook = " + to_string(TotalAmo);
             mb += "\n\nDo you want to buy another book?";
             int result = MessageBox(NULL, mb.c_str(), "Confirmation", MB_YESNO | MB_ICONQUESTION);
+
             if(result == IDYES){
-                
+                SetWindowText(TextBox1,"");
+                HomeMenu(hwnd);
             }
             else{
                 CheckUser(1,amount);
