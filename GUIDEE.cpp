@@ -6,6 +6,7 @@ using namespace std;
 LRESULT CALLBACK WndProc(HWND,UINT , WPARAM ,LPARAM);
 
 char textSaved1[256];
+char textSaved3[256];
 char textSaved2[256];
 float PriceEdit;
 char TitleEdit[100];
@@ -14,7 +15,7 @@ int count = 1,log = 1,come = 0,num=2,amo,TotalAmo=0,StockEdit,Discount;
 int Totalcost=0;
 void AddMenu(HWND);
 void HomeMenu(HWND);
-HWND textfield,button,buttonX,TextBox1,TextBox2,check,textsaved,yoyo;
+HWND textfield,button,buttonX,TextBox1,TextBox2,TextBox3,check,textsaved,yoyo;
 HWND text1,text2;
 HMENU hMenu;
 string id,pass,title1[100];
@@ -64,7 +65,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 LRESULT CALLBACK WndProc(HWND hwnd,UINT message, WPARAM wParam,LPARAM lParam){
 		switch(message){
 			case WM_CREATE:
-            TextBox1 = CreateWindow("EDIT","",WS_VISIBLE|WS_BORDER|WS_CHILD,625,40,75,25,hwnd,NULL,NULL,NULL);
+            TextBox3 = CreateWindow("EDIT","",WS_VISIBLE|WS_BORDER|WS_CHILD,625,40,75,25,hwnd,NULL,NULL,NULL);
             text1 = CreateWindow("STATIC","NUMBER",WS_VISIBLE|WS_CHILD,625,15,75,25,hwnd,NULL,NULL,NULL);
             TextBox2 = CreateWindow("EDIT","",WS_VISIBLE|WS_BORDER|WS_CHILD,625,105,75,25,hwnd,NULL,NULL,NULL);
             text2 = CreateWindow("STATIC","AMOUNT",WS_VISIBLE|WS_CHILD,625,80,60,25,hwnd,NULL,NULL,NULL);
@@ -74,8 +75,9 @@ LRESULT CALLBACK WndProc(HWND hwnd,UINT message, WPARAM wParam,LPARAM lParam){
 		    break;
 			case WM_COMMAND:
                     if(LOWORD(wParam)!=0){
-					GetWindowText(TextBox1,textSaved1,256);
+					GetWindowText(TextBox3,textSaved3,256);
 					GetWindowText(TextBox2,textSaved2,256);
+                    num = atoi(textSaved3);
                     amo = atoi(textSaved2);
 				    }
 				switch(wParam){
@@ -83,7 +85,6 @@ LRESULT CALLBACK WndProc(HWND hwnd,UINT message, WPARAM wParam,LPARAM lParam){
 					    MessageBeep(MB_OK);
 					break;
                     case 2:
-                        cout << num << amo;
                         buybook(num,amo);
 
                     break;
