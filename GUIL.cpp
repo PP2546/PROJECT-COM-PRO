@@ -131,7 +131,7 @@ LRESULT CALLBACK WndProc(HWND hwnd,UINT message, WPARAM wParam,LPARAM lParam){
 					}
 					if(come == 1){
 							//check = CreateWindow("STATIC","Success",WS_VISIBLE|WS_BORDER|WS_CHILD,250,250,100,30,hwnd,NULL,NULL,NULL);
-							MessageBox(NULL, "Success","Login",MB_ICONEXCLAMATION|MB_OK);
+							MessageBox(NULL, "Success","Login",MB_OK);
 							HINSTANCE hNewInstance = ShellExecute(NULL, "open", "GUIDEE.exe", NULL, NULL, SW_SHOWNORMAL);
 							PostQuitMessage(0);
 						}else{

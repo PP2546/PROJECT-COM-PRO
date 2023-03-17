@@ -81,7 +81,7 @@ LRESULT CALLBACK WndProc(HWND hwnd,UINT message, WPARAM wParam,LPARAM lParam){
     				dest.open("records.txt",ios::app);
    					dest << textSaved1 << textSaved2 << endl;
         			dest.close();
-					MessageBox(NULL, "Resgister","Success",MB_ICONEXCLAMATION|MB_OK);
+					MessageBox(NULL, "Resgister","Success",MB_OK);
 				}
 				else if(LOWORD(wParam) == 2){
 					string name,pw;
